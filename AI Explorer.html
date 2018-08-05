@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://10.43.139.201:57280/aie/index.html -->
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>AI Explorer</title>
+	<link rel="shortcut icon" href="http://10.43.139.201:57280/aie/favicon.png">
+	<link href="./AI Explorer_files/common.b34fdd3c.css" rel="stylesheet">
+	<link href="./AI Explorer_files/create.b34fdd3c.css" rel="stylesheet">
+	<style type="text/css">
+/**
+ * dat-gui JavaScript Controller Library
+ * http://code.google.com/p/dat-gui
+ *
+ * Copyright 2011 Data Arts Team, Google Creative Lab
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ */
+.slider {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+  height: 1em;
+  border-radius: 1em;
+  background-color: #eee;
+  padding: 0 0.5em;
+  overflow: hidden; }
+
+.slider-fg {
+  padding: 1px 0 2px 0;
+  background-color: #aaa;
+  height: 1em;
+  margin-left: -0.5em;
+  padding-right: 0.5em;
+  border-radius: 1em 0 0 1em; }
+
+.slider-fg:after {
+  display: inline-block;
+  border-radius: 1em;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  content: '';
+  float: right;
+  margin-right: -1em;
+  margin-top: -1px;
+  height: 0.9em;
+  width: 0.9em; }
+</style><style type="text/css">.dg {
+  /** Clear list styles */
+  /* Auto-place container */
+  /* Auto-placed GUI's */
+  /* Line items that don't contain folders. */
+  /** Folder names */
+  /** Hides closed items */
+  /** Controller row */
+  /** Name-half (left) */
+  /** Controller-half (right) */
+  /** Controller placement */
+  /** Shorter number boxes when slider is present. */
+  /** Ensure the entire boolean and function row shows a hand */ }
+  .dg ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    clear: both; }
+  .dg.ac {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    z-index: 0; }
+  .dg:not(.ac) .main {
+    /** Exclude mains in ac so that we don't hide close button */
+    overflow: hidden; }
+  .dg.main {
+    -webkit-transition: opacity 0.1s linear;
+    -o-transition: opacity 0.1s linear;
+    -moz-transition: opacity 0.1s linear;
+    transition: opacity 0.1s linear; }
+    .dg.main.taller-than-window {
+      overflow-y: auto; }
+      .dg.main.taller-than-window .close-button {
+        opacity: 1;
+        /* TODO, these are style notes */
+        margin-top: -1px;
+        border-top: 1px solid #2c2c2c; }
+    .dg.main ul.closed .close-button {
+      opacity: 1 !important; }
+    .dg.main:hover .close-button,
+    .dg.main .close-button.drag {
+      opacity: 1; }
+    .dg.main .close-button {
+      /*opacity: 0;*/
+      -webkit-transition: opacity 0.1s linear;
+      -o-transition: opacity 0.1s linear;
+      -moz-transition: opacity 0.1s linear;
+      transition: opacity 0.1s linear;
+      border: 0;
+      position: absolute;
+      line-height: 19px;
+      height: 20px;
+      /* TODO, these are style notes */
+      cursor: pointer;
+      text-align: center;
+      background-color: #000; }
+      .dg.main .close-button:hover {
+        background-color: #111; }
+  .dg.a {
+    float: right;
+    margin-right: 15px;
+    overflow-x: hidden; }
+    .dg.a.has-save > ul {
+      margin-top: 27px; }
+      .dg.a.has-save > ul.closed {
+        margin-top: 0; }
+    .dg.a .save-row {
+      position: fixed;
+      top: 0;
+      z-index: 1002; }
+  .dg li {
+    -webkit-transition: height 0.1s ease-out;
+    -o-transition: height 0.1s ease-out;
+    -moz-transition: height 0.1s ease-out;
+    transition: height 0.1s ease-out; }
+  .dg li:not(.folder) {
+    cursor: auto;
+    height: 27px;
+    line-height: 27px;
+    overflow: hidden;
+    padding: 0 4px 0 5px; }
+  .dg li.folder {
+    padding: 0;
+    border-left: 4px solid transparent; }
+  .dg li.title {
+    cursor: pointer;
+    margin-left: -4px; }
+  .dg .closed li:not(.title),
+  .dg .closed ul li,
+  .dg .closed ul li > * {
+    height: 0;
+    overflow: hidden;
+    border: 0; }
+  .dg .cr {
+    clear: both;
+    padding-left: 3px;
+    height: 27px; }
+  .dg .property-name {
+    cursor: default;
+    float: left;
+    clear: left;
+    width: 40%;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+  .dg .c {
+    float: left;
+    width: 60%; }
+  .dg .c input[type=text] {
+    border: 0;
+    margin-top: 4px;
+    padding: 3px;
+    width: 100%;
+    float: right; }
+  .dg .has-slider input[type=text] {
+    width: 30%;
+    /*display: none;*/
+    margin-left: 0; }
+  .dg .slider {
+    float: left;
+    width: 66%;
+    margin-left: -5px;
+    margin-right: 0;
+    height: 19px;
+    margin-top: 4px; }
+  .dg .slider-fg {
+    height: 100%; }
+  .dg .c input[type=checkbox] {
+    margin-top: 9px; }
+  .dg .c select {
+    margin-top: 5px; }
+  .dg .cr.function,
+  .dg .cr.function .property-name, .dg .cr.function *,
+  .dg .cr.boolean,
+  .dg .cr.boolean * {
+    cursor: pointer; }
+  .dg .selector {
+    display: none;
+    position: absolute;
+    margin-left: -9px;
+    margin-top: 23px;
+    z-index: 10; }
+  .dg .c:hover .selector,
+  .dg .selector.drag {
+    display: block; }
+  .dg li.save-row {
+    padding: 0; }
+    .dg li.save-row .button {
+      display: inline-block;
+      padding: 0px 6px; }
+  .dg.dialogue {
+    background-color: #222;
+    width: 460px;
+    padding: 15px;
+    font-size: 13px;
+    line-height: 15px; }
+
+/* TODO Separate style and structure */
+#dg-new-constructor {
+  padding: 10px;
+  color: #222;
+  font-family: Monaco, monospace;
+  font-size: 10px;
+  border: 0;
+  resize: none;
+  box-shadow: inset 1px 1px 1px #888;
+  word-wrap: break-word;
+  margin: 12px 0;
+  display: block;
+  width: 440px;
+  overflow-y: scroll;
+  height: 100px;
+  position: relative; }
+
+#dg-local-explain {
+  display: none;
+  font-size: 11px;
+  line-height: 17px;
+  border-radius: 3px;
+  background-color: #333;
+  padding: 8px;
+  margin-top: 10px; }
+  #dg-local-explain code {
+    font-size: 10px; }
+
+#dat-gui-save-locally {
+  display: none; }
+
+/** Main type */
+.dg {
+  color: #eee;
+  font: 11px 'Lucida Grande', sans-serif;
+  text-shadow: 0 -1px 0 #111;
+  /** Auto place */
+  /* Controller row, <li> */
+  /** Controllers */ }
+  .dg.main {
+    /** Scrollbar */ }
+    .dg.main::-webkit-scrollbar {
+      width: 5px;
+      background: #1a1a1a; }
+    .dg.main::-webkit-scrollbar-corner {
+      height: 0;
+      display: none; }
+    .dg.main::-webkit-scrollbar-thumb {
+      border-radius: 5px;
+      background: #676767; }
+  .dg li:not(.folder) {
+    background: #1a1a1a;
+    border-bottom: 1px solid #2c2c2c; }
+  .dg li.save-row {
+    line-height: 25px;
+    background: #dad5cb;
+    border: 0; }
+    .dg li.save-row select {
+      margin-left: 5px;
+      width: 108px; }
+    .dg li.save-row .button {
+      margin-left: 5px;
+      margin-top: 1px;
+      border-radius: 2px;
+      font-size: 9px;
+      line-height: 7px;
+      padding: 4px 4px 5px 4px;
+      background: #c5bdad;
+      color: #fff;
+      text-shadow: 0 1px 0 #b0a58f;
+      box-shadow: 0 -1px 0 #b0a58f;
+      cursor: pointer; }
+      .dg li.save-row .button.gears {
+        background: #c5bdad url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAANCAYAAAB/9ZQ7AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAQJJREFUeNpiYKAU/P//PwGIC/ApCABiBSAW+I8AClAcgKxQ4T9hoMAEUrxx2QSGN6+egDX+/vWT4e7N82AMYoPAx/evwWoYoSYbACX2s7KxCxzcsezDh3evFoDEBYTEEqycggWAzA9AuUSQQgeYPa9fPv6/YWm/Acx5IPb7ty/fw+QZblw67vDs8R0YHyQhgObx+yAJkBqmG5dPPDh1aPOGR/eugW0G4vlIoTIfyFcA+QekhhHJhPdQxbiAIguMBTQZrPD7108M6roWYDFQiIAAv6Aow/1bFwXgis+f2LUAynwoIaNcz8XNx3Dl7MEJUDGQpx9gtQ8YCueB+D26OECAAQDadt7e46D42QAAAABJRU5ErkJggg==) 2px 1px no-repeat;
+        height: 7px;
+        width: 8px; }
+      .dg li.save-row .button:hover {
+        background-color: #bab19e;
+        box-shadow: 0 -1px 0 #b0a58f; }
+  .dg li.folder {
+    border-bottom: 0; }
+  .dg li.title {
+    padding-left: 16px;
+    background: #000 url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlI+hKgFxoCgAOw==) 6px 10px no-repeat;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+  .dg .closed li.title {
+    background-image: url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlGIWqMCbWAEAOw==); }
+  .dg .cr.boolean {
+    border-left: 3px solid #806787; }
+  .dg .cr.color {
+    border-left: 3px solid; }
+  .dg .cr.function {
+    border-left: 3px solid #e61d5f; }
+  .dg .cr.number {
+    border-left: 3px solid #2FA1D6; }
+    .dg .cr.number input[type=text] {
+      color: #2FA1D6; }
+  .dg .cr.string {
+    border-left: 3px solid #1ed36f; }
+    .dg .cr.string input[type=text] {
+      color: #1ed36f; }
+  .dg .cr.function:hover,
+  .dg .cr.boolean:hover {
+    background: #111; }
+  .dg .c input[type=text] {
+    background: #303030;
+    outline: none; }
+    .dg .c input[type=text]:hover {
+      background: #3c3c3c; }
+    .dg .c input[type=text]:focus {
+      background: #494949;
+      color: #fff; }
+  .dg .c .slider {
+    background: #303030;
+    cursor: ew-resize; }
+  .dg .c .slider-fg {
+    background: #2FA1D6; }
+  .dg .c .slider:hover {
+    background: #3c3c3c; }
+    .dg .c .slider:hover .slider-fg {
+      background: #44abda; }
+</style>
+<style type="text/css">[object Object]</style>
+</head>
+
+<body style="overflow: auto;">
+<div class="top-side">
+<div id="myLogo" class="logo" style="position:fixed;left:0;top:0;width:600px;height:45px">
+<a href="http://10.43.139.201:57280/aie/index.html" style="color:#FFF;text-decoration:none;margin-left:20px;display:inline-block">
+<span style="font-size: 26px">AI Explorer</span>
+</a>
+</div>
+<!-- 账户 profile -->
+<div class="menu-right">
+    <ul class="notification-menu">
+        <li class=""><a href="http://10.43.139.201:57280/aie/index.html#" class="btn dropdown-toggle" data-toggle="dropdown">
+            <span id="username">admin</span> <span class="caret"></span>
+            </a>
+          <ul class="dropdown-menu dropdown-menu-usermenu pull-right" style="width: 119px;">
+            <li class=""><a href="http://10.43.139.201:57280/aie/help/index.html" target="_blank">
+                <i class="fa fa-wikipedia-w"></i><span id_i18n="ict_oneminer_help">帮助</span></a></li>
+            <li><a href="http://10.43.139.201:57280/aie/index.html#" id="about">
+                <i class="fa fa-th-large"></i><span id_i18n="ict_oneminer_about">关于</span></a></li>
+            <li><a href="http://10.43.139.201:57280/aie/index.html#" id="signout">
+                <i class="fa fa-sign-out"></i><span id_i18n="ict_oneminer_logout">注销</span></a></li>
+          </ul>
+        </li>
+    </ul>
+</div>
+</div>
+<!-- 左侧导航栏 -->
+<div class="left-side">
+    <ul class="nav">
+        <li role="presentation" class="menu-list" type="home" id="left-side-inner-homepage">
+          <a><i class="fa fa-home"></i><span class="block" id_i18n="ict_oneminer_nav_home">首页</span></a></li>
+        <li role="presentation" class="menu-list active" type="exp" id="left-side-inner-experiment">
+          <a><i class="fa fa-flask"></i><span class="block" id_i18n="ict_oneminer_nav_lab">实验</span></a></li>
+        <li role="presentation" class="menu-list" type="manage" id="left-side-inner-manage">
+          <a><i class="fa fa-database"></i><span class="block" id_i18n="ict_oneminer_nav_manage">管理</span></a></li>
+        <li role="presentation" class="menu-list" type="log" id="left-side-inner-log">
+          <a><i class="fa fa-list"></i><span class="block" id_i18n="ict_oneminer_nav_maintenance">维护</span></a>
+          <ul class="maint-menu"><li type="log"><a><span class="block" id_i18n="ict_oneminer_nav_log">日志</span></a></li>
+            <li type="backup"><a><span class="block" id_i18n="ict_oneminer_nav_backup">备份恢复</span></a></li>
+          </ul>
+        </li>
+    </ul>
+</div>
+
+<!-- 首页 我的实验 -->
+<div class="main-content">
+  <div id="home" class="wrapper" tabindex="1" style="overflow: hidden; outline: none; display: none;">
+    <div class="header" style="margin-top: 7px">
+      <div class="exp-img"> </div>
+      <label id="labIndex-myexperiment" id_i18n="ict_oneminer_home_mylab">我的实验</label>
+    </div>
+    <hr style="margin-top:5px;margin-bottom: 10px">
+    <div class="labIndex-body">
+       < button id="refreshExpBtn" class="btn btn-primary btn-sm mr5" id_i18n="ict_oneminer_button_refresh">刷新</button> 
+       <button id="addLab" class="btn btn-primary btn-sm mr5" id_i18n="ict_oneminer_process_title_create_experiment">新建</button>
+       <button id="importExpBtn" class="btn btn-primary btn-sm mr5" id_i18n="ict_oneminer_button_import">导入</button>
+    <div class="dropdown download-exp-div"><button class="btn btn-primary btn-sm dropdown-toggle" id="downloadExpBtn" type="button">
+       <i class="fa fa-download"></i> <span id_i18n="ict_oneminer_button_export">导出</span> <span class="caret"></span></button>
+         <ul class="dropdown-menu download-exp" aria-labelledby="downloadExpBtn" style="width: 94px;">
+           <li><a data-type="exp" href="http://10.43.139.201:57280/aie/index.html#" id_i18n="ict_oneminer_button_export_experiments">实验</a></li>
+           <li><a data-type="jar" href="http://10.43.139.201:57280/aie/index.html#" id_i18n="ict_oneminer_button_export_jars">算法包</a></li>
+         </ul>
+    </div>
+    <div id="labList">
+       <div id="expTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+       <div class="search">
+       <div id="expTable_filter" class="dataTables_filter">
+         <label><input type="search" class="form-control input-sm" placeholder="" aria-controls="expTable"></label>
+       </div>
+     </div>
+     <table id="expTable" class="table table-bordered no-footer dataTable" role="grid" aria-describedby="expTable_info" style="">
+       <thead><tr role="row">
+         <th class="sorting_disabled" tabindex="0" aria-controls="expTable" rowspan="1" colspan="1" aria-label="" style="width: 6%;">
+           <input type="checkbox" id="selectAllExp"><label for="selectAllExp"></label>
+         </th>
+         <th class="sorting" tabindex="0" aria-controls="expTable" rowspan="1" colspan="1" aria-label="实验名称: activate to sort column ascending" style="width: 20%;">
+           <span class="block" id_i18n="ict_oneminer_table_head_experiment_name">实验名称</span>
+         </th>
+         <th class="sorting" tabindex="0" aria-controls="expTable" rowspan="1" colspan="1" aria-label="实验描述: activate to sort column ascending" style="width: 35%;">
+           <span class="block" id_i18n="ict_oneminer_table_head_experiment_description">实验描述</span>
+         </th>
+         <th class="sorting" tabindex="0" aria-controls="expTable" rowspan="1" colspan="1" aria-label="更新时间: activate to sort column ascending" style="width: 173px;">
+           <span class="block" id_i18n="ict_oneminer_table_head_experiment_update_time">更新时间</span>
+         </th>
+         <th class="sorting" tabindex="0" aria-controls="expTable" rowspan="1" colspan="1" aria-label="状态: activate to sort column ascending" style="width: 104px;">
+           <span class="block" id_i18n="ict_oneminer_table_head_experiment_status">状态</span>
+         </th>
+         <th class="sorting" tabindex="0" aria-controls="expTable" rowspan="1" colspan="1" aria-label="是否发布: activate to sort column ascending" style="width: 174px;">
+           <span class="block" id_i18n="ict_oneminer_table_head_experiment_release">是否发布</span>
+         </th>
+         <th class="sorting_disabled" tabindex="0" aria-controls="expTable" rowspan="1" colspan="1" aria-label="操作" style="width: 8%;">
+           <span class="block" id_i18n="ict_oneminer_table_head_operator">操作</span>
+         </th>
+        </tr></thead>
+       <tbody>
+        <tr role="row" class="odd">
+          <td><input type="checkbox" class="check-exp" data-exp="0801" id="expCheck0" style="display:none"><label for="expCheck0"></label></td>
+          <td><div class="exp-name text-ellipsis"><a class="link-exp" title="0801">0801</a></div></td>
+          <td><div class="text-ellipsis home-max-width" title=""></div></td>
+          <td>2018-08-02 17:00:02.0</td>
+          <td><i class="fa fa-circle" style="color:#ff6160;"></i><span style="margin-left:10px;color:white;">失败</span></td>
+          <td><div class="switch" data-status="off"><div class="switch-off"><div class="off-circle"></div><div class="off-right">OFF</div></div></div></td>
+          <td><div class="operate-div">
+            <i class="fa fa-edit edit-exp" title="编辑"></i>
+            <i class="fa fa-hand-o-right auth-exp " title="权限"></i>
+            <i class="fa fa-trash-o del-exp" title="删除"></i>
+           </div></td>
+         </tr>
+         <tr role="row" class="even">
+          <td><input type="checkbox" class="check-exp" data-exp="Aaaaaa" id="expCheck1" style="display:none"><label for="expCheck1"></label></td>
+          <td><div class="exp-name text-ellipsis"><a class="link-exp" title="Aaaaaa">Aaaaaa</a></div></td><td><div class="text-ellipsis home-max-width" title=""></div></td>
+          <td>2018-08-02 17:20:16.0</td><td><i class="fa fa-circle" style="color:#5cb85c;"></i><span style="margin-left:10px;color:white;">成功</span></td>
+          <td><div class="switch" data-status="off"><div class="switch-off"><div class="off-circle"></div><div class="off-right">OFF</div></div></div></td>
+          <td><div class="operate-div">
+              <i class="fa fa-edit edit-exp" title="编辑"></i>
+              <i class="fa fa-hand-o-right auth-exp " title="权限"></i>
+              <i class="fa fa-trash-o del-exp" title="删除"></i>
+           </div></td>
+         </tr>
+         <tr role="row" class="odd">
+           <td><input type="checkbox" class="check-exp" data-exp="BayesNetwork" id="expCheck2" style="display:none"><label for="expCheck2"></label></td>
+           <td><div class="exp-name text-ellipsis"><a class="link-exp" title="BayesNetwork">BayesNetwork</a></div></td>
+           <td><div class="text-ellipsis home-max-width" title="BayesNetwork including: 图像展示 贝叶斯网络训练 贝叶斯网络预测 图像展示(2)">BayesNetwork including: 图像展示 贝叶斯网络训练 贝叶斯网络预测 图像展示(2)</div></td>
+           <td>2018-08-02 16:34:10.0</td><td><i class="fa fa-circle" style="color:#5cb85c;"></i><span style="margin-left:10px;color:white;">成功</span></td>
+          <td><div class="switch" data-status="off"><div class="switch-off"><div class="off-circle"></div><div class="off-right">OFF</div></div></div></td>
+          <td><div class="operate-div">
+              <i class="fa fa-edit edit-exp" title="编辑"></i>
+              <i class="fa fa-hand-o-right auth-exp " title="权限"></i>
+              <i class="fa fa-trash-o del-exp" title="删除"></i>
+          </div></td>
+         </tr>
+         <tr role="row" class="even">
+           <td><input type="checkbox" class="check-exp" data-exp="BayesNetwork_2_0" id="expCheck3" style="display:none"><label for="expCheck3"></label></td>
+           <td><div class="exp-name text-ellipsis"><a class="link-exp" title="BayesNetwork_2_0">BayesNetwork_2_0</a></div></td>
+           <td><div class="text-ellipsis home-max-width" title="BayesNetwork_2_0 including: 图像展示 贝叶斯网络训练 贝叶斯网络预测 图像展示(2)">BayesNetwork_2_0 including: 图像展示 贝叶斯网络训练 贝叶斯网络预测 图像展示(2)</div></td>
+           <td>2018-08-02 16:38:56.0</td><td><i class="fa fa-circle" style="color:#5cb85c;"></i><span style="margin-left:10px;color:white;">成功</span></td>
+           <td><div class="switch" data-status="off"><div class="switch-off"><div class="off-circle"></div><div class="off-right">OFF</div></div></div></td>
+           <td><div class="operate-div">
+                        <i class="fa fa-edit edit-exp" title="编辑"></i>
+                        <i class="fa fa-hand-o-right auth-exp " title="权限"></i>
+                        <i class="fa fa-trash-o del-exp" title="删除"></i>
+            </div></td>
+          </tr>
+          <tr role="row" class="odd"> 
+            <td><input type="checkbox" class="check-exp" data-exp="CCOPowerAlg" id="expCheck4" style="display:none"><label for="expCheck4"></label></td>
+            <td><div class="exp-name text-ellipsis"><a class="link-exp" title="CCOPowerAlg">CCOPowerAlg</a></div></td>
+            <td><div class="text-ellipsis home-max-width" title=""></div></td><td>2018-08-02 16:04:20.0</td>
+            <td><i class="fa fa-circle" style="color:#b3b3b3;"></i><span style="margin-left:10px;color:white;">未运行</span></td>
+            <td><div class="switch" data-status="on"><div class="switch-on"><div class="on-circle">ON</div><div class="on-right"></div></div></div></td>
+            <td><div class="operate-div">
+                        <i class="fa fa-edit edit-exp" title="编辑"></i>
+                        <i class="fa fa-hand-o-right auth-exp " title="权限"></i>
+                        <i class="fa fa-trash-o del-exp" title="删除"></i>
+            </div></td>
+           </tr>
+         </tbody>
+       </table>
+    <div class="diyTableBottom">
+     <div class="dataTables_info" id="expTable_info" role="status" aria-live="polite">共 104 条记录 &nbsp;&nbsp; 第 1 页 / 共 21 页</div>
+     <div class="dataTables_paginate paging_full" id="expTable_paginate">
+     <ul class="pagination">
+        <li class="paginate_button first disabled" id="expTable_first"><a href="http://10.43.139.201:57280/aie/index.html#" aria-controls="expTable" data-dt-idx="0" tabindex="0">首页</a></li>
+        <li class="paginate_button previous disabled" id="expTable_previous"><a href="http://10.43.139.201:57280/aie/index.html#" aria-controls="expTable" data-dt-idx="1" tabindex="0">上一页</a></li>
+        <li class="paginate_button next" id="expTable_next"><a href="http://10.43.139.201:57280/aie/index.html#" aria-controls="expTable" data-dt-idx="2" tabindex="0">下一页</a></li>
+        <li class="paginate_button last" id="expTable_last"><a href="http://10.43.139.201:57280/aie/index.html#" aria-controls="expTable" data-dt-idx="3" tabindex="0">末页</a></li>
+      </ul>
+      </div>
+      <div class="dataTables_length" id="expTable_length"><label>每页显示  <select name="expTable_length" aria-controls="expTable" class="form-control input-sm">
+           <option value="5">5</option>
+           <option value="10">10</option>
+           <option value="25">25</option>
+           <option value="50">50</option>
+         </select></label></div></div></div></div></div>
+<!-- 首页 模板 -->
+      <div style="margin-top: 30px" class="header"><div class="temp-img"></div>
+       <label id="labTemplate-label" id_i18n="ict_oneminer_home_template">模板</label></div><hr style="margin-top:5px;margin-bottom: 10px">
+         <div id="labTemplate"><div>
+           <button id="refreshTempBtn" class="btn btn-primary btn-sm mr5" id_i18n="ict_oneminer_button_refresh">刷新</button> 
+           <button id="importTempBtn" class="btn btn-primary btn-sm mr5" id_i18n="ict_oneminer_button_import">导入</button> 
+           <button id="exportTempBtn" class="btn btn-primary btn-sm mr5" id_i18n="ict_oneminer_button_export">导出</button> 
+           <span style="margin-left: 20px" id_i18n="ict_oneminer_template_label">模板属性：</span>
+             <label class="checkbox-inline">
+               <input class="temp-type mine" type="checkbox" value="1" checked="true" id="mineTemp">
+                 <label for="mineTemp"></label><span id_i18n="ict_oneminer_template_type_mine">我的</span></label>
+                 <label class="checkbox-inline system"><input class="temp-type" type="checkbox" value="2" checked="true" id="sysTemp">
+                 <label for="sysTemp"></label><span id_i18n="ict_oneminer_template_type_system">系统</span></label>
+                 <label class="checkbox-inline others"><input class="temp-type" type="checkbox" value="3" checked="true" id="otherTemp">
+                 <label for="otherTemp"></label><span id_i18n="ict_oneminer_template_type_others">其他</span></label>
+          </div>
+          <div id="templateList"><div id="tempTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+            <div class="search"><div id="tempTable_filter" class="dataTables_filter">
+              <label><input type="search" class="form-control input-sm" placeholder="" aria-controls="tempTable">
+              </label>
+            </div>
+          </div>
+          <table id="tempTable" class="table table-bordered home-table no-footer dataTable" role="grid" aria-describedby="tempTable_info" style="">
+            <thead>
+              <tr role="row">
+               <th class="sorting_disabled" tabindex="0" aria-controls="tempTable" rowspan="1" colspan="1" aria-label="" style="width: 6%;">
+                <input type="checkbox" id="selectAllTemp"><label for="selectAllTemp"></label>
+               </th>
+               <th class="sorting" tabindex="0" aria-controls="tempTable" rowspan="1" colspan="1" aria-label="模板名称: activate to sort column ascending" style="width: 20%;">
+                <span class="block" id_i18n="ict_oneminer_table_head_template_name">模板名称</span>
+               </th>
+               <th class="sorting" tabindex="0" aria-controls="tempTable" rowspan="1" colspan="1" aria-label="模板描述: activate to sort column ascending" style="width: 35%;">
+                <span class="block" id_i18n="ict_oneminer_table_head_template_description">模板描述</span>
+               </th><th class="sorting" tabindex="0" aria-controls="tempTable" rowspan="1" colspan="1" aria-label="创建时间: activate to sort column ascending" style="width: 250px;">
+                <span class="block" id_i18n="ict_oneminer_table_head_template_create_date">创建时间</span>
+               </th>
+               <th class="sorting_disabled" tabindex="0" aria-controls="tempTable" rowspan="1" colspan="1" aria-label="操作" style="width: 8%;">
+                <span class="block" id_i18n="ict_oneminer_table_head_operator">操作</span>
+               </th>
+              </tr>
+             </thead>
+             <tbody>
+              <tr role="row" class="odd">
+               <td><input type="checkbox" class="check-temp" data-temp="CCOPowerAlg" id="tempCheck0" style="display:none"><label for="tempCheck0"></label></td>
+               <td><div class="temp-name text-ellipsis"><a class="link-temp" title="CCOPowerAlg">CCOPowerAlg</a></div></td>
+               <td><div class="text-ellipsis home-max-width" title="模板发布日期为2018.5.3">模板发布日期为2018.5.3</div></td>
+               <td>2018-08-02 16:04:20.0</td><td><div class="operate-div">
+                            <i class="fa fa-edit edit-temp" title="编辑"></i>
+                            <i class="fa fa-trash-o del-temp" title="删除"></i>
+                   </div></td>
+              </tr>
+              <tr role="row" class="even">
+               <td><input type="checkbox" class="check-temp" data-temp="DIYSAPRK202" id="tempCheck1" style="display:none"><label for="tempCheck1"></label></td><td><div class="temp-name text-ellipsis"><a class="link-temp" title="DIYSAPRK202">DIYSAPRK202</a></div></td><td><div class="text-ellipsis home-max-width" title="网管数据清洗流程">网管数据清洗流程</div></td><td>2018-08-02 16:04:20.0</td><td><div class="operate-div">
+                            <i class="fa fa-edit edit-temp" title="编辑"></i>
+                            <i class="fa fa-trash-o del-temp" title="删除"></i>
+                        </div></td></tr><tr role="row" class="odd"><td><input type="checkbox" class="check-temp" data-temp="DIYspark202" id="tempCheck2" style="display:none"><label for="tempCheck2"></label></td><td><div class="temp-name text-ellipsis"><a class="link-temp" title="DIYspark202">DIYspark202</a></div></td><td><div class="text-ellipsis home-max-width" title="远程电子下倾角自测">远程电子下倾角自测</div></td><td>2018-08-02 16:04:20.0</td><td><div class="operate-div">
+                            <i class="fa fa-edit edit-temp" title="编辑"></i>
+                            <i class="fa fa-trash-o del-temp" title="删除"></i>
+                        </div>
+                </td>
+              </tr>
+            </tbody>
+           </table>
+           <div class="diyTableBottom">
+            <div class="dataTables_info" id="tempTable_info" role="status" aria-live="polite">共 3 条记录 &nbsp;&nbsp; 第 1 页 / 共 1 页</div>
+            <div class="dataTables_paginate paging_full" id="tempTable_paginate">
+              <ul class="pagination">
+                <li class="paginate_button first disabled" id="tempTable_first"><a href="http://10.43.139.201:57280/aie/index.html#" aria-controls="tempTable" data-dt-idx="0" tabindex="0">首页</a></li>
+                <li class="paginate_button previous disabled" id="tempTable_previous"><a href="http://10.43.139.201:57280/aie/index.html#" aria-controls="tempTable" data-dt-idx="1" tabindex="0">上一页</a></li>
+                <li class="paginate_button next disabled" id="tempTable_next"><a href="http://10.43.139.201:57280/aie/index.html#" aria-controls="tempTable" data-dt-idx="2" tabindex="0">下一页</a></li>
+                <li class="paginate_button last disabled" id="tempTable_last"><a href="http://10.43.139.201:57280/aie/index.html#" aria-controls="tempTable" data-dt-idx="3" tabindex="0">末页</a></li>
+              </ul>
+            </div>
+            <div class="dataTables_length" id="tempTable_length"><label>每页显示  <select name="tempTable_length" aria-controls="tempTable" class="form-control input-sm">
+              <option value="5">5</option><option value="10">10</option><option value="25">25</option><option value="50">50</option></select></label>
+            </div>
+           </div>
+          </div>
+         </div>
+       </div>
+     </div>
+<!-- 实验 实验 -->
+     <div id="exp" class="ui-layout-container" style="overflow: hidden; position: relative; display: block;">
+     <div id="west-panel" class="ui-layout-pane ui-layout-pane-west" style="position: absolute; margin: 0px; left: 0px; right: auto; top: 0px; bottom: 0px; height: 588px; z-index: 0; width: 240px; display: block; visibility: visible;">
+     <div id="op-mod-tabs" class="ui-tabs ui-corner-all ui-widget ui-widget-content">
+       <ul role="tablist" class="ui-tabs-nav ui-corner-all ui-helper-reset ui-helper-clearfix ui-widget-header">
+         <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="exp-tab" aria-labelledby="ui-id-1" aria-selected="false" aria-expanded="false">
+           <a href="http://10.43.139.201:57280/aie/index.html#exp-tab" id_i18n="ict_oneminer_nav_lab" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-1">实验</a>
+         </li>
+         <li role="tab" tabindex="0" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active" aria-controls="op-tab" aria-labelledby="ui-id-2" aria-selected="true" aria-expanded="true">
+           <a href="http://10.43.139.201:57280/aie/index.html#op-tab" id_i18n="ict_oneminer_process_title_component" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">组件</a>
+         </li>
+         <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="mod-tab" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false">
+           <a href="http://10.43.139.201:57280/aie/index.html#mod-tab" id_i18n="ict_oneminer_process_title_model" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">模型</a>
+         </li>
+       </ul>
+     <div class="tab-content" style="height: calc(100% - 40px)"><div id="exp-tab" style="height: 100%; display: none;" aria-labelledby="ui-id-1" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="true">
+     <div class="input-group col-md-12 tabSearchDiv">
+       <input type="search" class="form-control" id="expSearch" pl_i18n="ict_oneminer_search_experiment" placeholder="搜索实验">
+     </div>
+     <div id="exp-color-chose" class="clearfix"><label for="" class="pull-left" id_i18n="ict_oneminer_process_chose">筛选:</label>
+       <div id="color-chose">
+         <div class="pull-left type-circle type-circle-cho process-type-1"><div class="inner-circle"></div></div>
+         <div class="pull-left type-circle type-circle-cho process-type-2"><div class="inner-circle"></div></div>
+         <div class="pull-left type-circle type-circle-cho process-type-3"><div class="inner-circle"></div></div>
+         <div class="pull-left type-circle type-circle-cho process-type-4"><div class="inner-circle"></div></div>
+         <div class="pull-left type-circle type-circle-cho process-type-5"><div class="inner-circle"></div></div>
+       </div>
+     </div>
+     <span id="experiment-tree-noMatches" id_i18n="ict_oneminer_no_experiment_found" style="display:none;color:red">无匹配实验</span>
+     <div id="exp-tree-div" class="op-mod-tree-div" tabindex="4" style="overflow: hidden; outline: none; width: 235px;">
+     <ul id="experiment-tree" class="ztree pageLeft"><li id="experiment-tree_1" class="level0" tabindex="0" hidefocus="true" treenode="" style="display: block;">
+       <a id="experiment-tree_1_a" class="level0 model-root" treenode_a="" onclick="" target="_blank" style="" title="我的实验" data-id="1">
+        <span id="experiment-tree_1_switch" title="" class="button level0 switch noline_open" treenode_switch=""></span>
+        <span id="experiment-tree_1_ico" title="" treenode_ico="" class="button ico_open" style=""></span>
+        <span id="experiment-tree_1_span" class="node_name">我的实验</span>
+       </a>
+       <ul id="experiment-tree_1_ul" class="level0 " style="">
+         <li id="experiment-tree_2" class="level1" tabindex="0" hidefocus="true" treenode="" data-owner="admin" style="border-width: 0px; display: block;">
+           <a id="experiment-tree_2_a" class="level1 curSelectedNode" treenode_a="" onclick="" target="_blank" style="" title="0801">
+             <span style="display: inline-block;width:24px"></span>
+               <span id="experiment-tree_2_switch" title="" class="button level1 switch noline_docu" treenode_switch=""></span>
+               <span id="experiment-tree_2_ico" title="" treenode_ico="" class="button ico_docu fa fa-flask p-0" style="padding-top: 8px;"></span>
+               <span id="experiment-tree_2_span" class="node_name">0801</span></a>
+         </li>
+         <li id="experiment-tree_3" class="level1" tabindex="0" hidefocus="true" treenode="" data-owner="admin" style="border-width: 0px; display: block;">
+           <a id="experiment-tree_3_a" class="level1" treenode_a="" onclick="" target="_blank" style="" title="Aaaaaa">
+             <span style="display: inline-block;width:24px"></span>
+               <span id="experiment-tree_3_switch" title="" class="button level1 switch noline_docu" treenode_switch=""></span>
+               <span id="experiment-tree_3_ico" title="" treenode_ico="" class="button ico_docu fa fa-flask p-0" style="padding-top: 8px;"></span>
+               <span id="experiment-tree_3_span" class="node_name">Aaaaaa</span></a>
+         </li>
+         <li id="experiment-tree_4" class="level1" tabindex="0" hidefocus="true" treenode="" data-owner="admin" style="border-width: 0px; display: block;">
+            <a id="experiment-tree_4_a" class="level1" treenode_a="" onclick="" target="_blank" style="" title="BayesNetwork">
+               <span style="display: inline-block;width:24px"></span>
+               span id="experiment-tree_4_switch" title="" class="button level1 switch noline_docu" treenode_switch=""></span>
+               <span id="experiment-tree_4_ico" title="" treenode_ico="" class="button ico_docu fa fa-flask p-0" style="padding-top: 8px;"></span>
+               <span id="experiment-tree_4_span" class="node_name">BayesNetwork</span>
+            </a>
+          </li>
+          <li id="experiment-tree_5" class="level1" tabindex="0" hidefocus="true" treenode="" data-owner="admin" style="border-width: 0px; display: block;">
+            <a id="experiment-tree_5_a" class="level1" treenode_a="" onclick="" target="_blank" style="" title="BayesNetwork_2_0">
+               <span style="display: inline-block;width:24px"></span><span id="experiment-tree_5_switch" title="" class="button level1 switch noline_docu" treenode_switch=""></span>
+               <span id="experiment-tree_5_ico" title="" treenode_ico="" class="button ico_docu fa fa-flask p-0" style="padding-top: 8px;"></span>
+               <span id="experiment-tree_5_span" class="node_name">BayesNetwork_2_0</span></a>
+          </li>
+          <li id="experiment-tree_6" class="level1" tabindex="0" hidefocus="true" treenode="" data-owner="admin" style="border-width: 0px; display: block;">
+            <a id="experiment-tree_104_a" class="level1" treenode_a="" onclick="" target="_blank" style="" title="time_series_prediction_SecondExponentialSmoothing_content">
+               <span style="display: inline-block;width:24px"></span><span id="experiment-tree_104_switch" title="" class="button level1 switch noline_docu" treenode_switch=""></span>
+               <span id="experiment-tree_104_ico" title="" treenode_ico="" class="button ico_docu fa fa-flask p-0" style="padding-top: 8px;"></span>
+               <span id="experiment-tree_104_span" class="node_name">time_series_prediction_SecondExponentialSmoothing_content</span></a>
+          </li>
+          <li id="experiment-tree_105" class="level1" tabindex="0" hidefocus="true" treenode="" data-owner="admin" style="border-width: 0px; display: block;">
+            <a id="experiment-tree_105_a" class="level1" treenode_a="" onclick="" target="_blank" style="" title="write_sparktable_2_0">
+               <span style="display: inline-block;width:24px"></span>
+               <span id="experiment-tree_105_switch" title="" class="button level1 switch noline_docu" treenode_switch=""></span>
+               <span id="experiment-tree_105_ico" title="" treenode_ico="" class="button ico_docu fa fa-flask p-0" style="padding-top: 8px;"></span>
+               <span id="experiment-tree_105_span" class="node_name">write_sparktable_2_0</span></a>
+          </li>
+         </ul>
+        </li>
+       </ul>
+      </div>
+     </div>
+<!-- 实验-组件 -->
+     <div id="op-tab" style="height: 100%; display: block;" aria-labelledby="ui-id-2" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="false">
+     <div class="input-group col-md-12 tabSearchDiv">
+     <input type="search" class="form-control" id="opSearch" pl_i18n="ict_oneminer_search_operator" placeholder="搜索算子"></div>
+       <span id="operator-tree-noMatches" id_i18n="ict_oneminer_no_operator_found" style="display:none;color:red">无匹配算子</span>
+       <div id="op-tree-div" class="op-mod-tree-div" tabindex="6" style="overflow: hidden; outline: none; width: 235px;">
+         <ul id="operator-tree" class="ztree pageLeft">
+           <li id="operator-tree_1" class="level0" tabindex="0" hidefocus="true" treenode="" style="display: block;">
+             <a id="operator-tree_1_a" class="level0 model-root" treenode_a="" onclick="" target="_blank" style="" title="数据存取" data-id="Data Access">
+             <span id="operator-tree_1_switch" title="" class="button level0 switch noline_close" treenode_switch=""></span>
+             <span id="operator-tree_1_ico" title="" treenode_ico="" class="button ico_close" style=""></span>
+             <span id="operator-tree_1_span" class="node_name">数据存取</span></a><ul id="operator-tree_1_ul" class="level0 " style="display:none">
+               <li id="operator-tree_2" class="level1" tabindex="0" hidefocus="true" treenode="" style="border-width: 0px; display: block;">
+                 <a id="operator-tree_2_a" class="level1" treenode_a="" onclick="" target="_blank" style="" title="读SPARK表">
+                   <span style="display: inline-block;width:24px"></span><span id="operator-tree_2_switch" title="" class="button level1 switch noline_docu" treenode_switch=""></span>
+                   <span id="operator-tree_2_ico" title="" treenode_ico="" class="button ico_docu fa fa-list-alt" style="padding-top: 8px;"></span>
+                   <span id="operator-tree_2_span" class="node_name">读SPARK表</span></a>
+                </li>
+                <li id="operator-tree_3" class="level1" tabindex="0" hidefocus="true" treenode="" style="border-width: 0px; display: block;">
+                 <a id="operator-tree_3_a" class="level1" treenode_a="" onclick="" target="_blank" style="" title="表写入数据库">
+                   <span style="display: inline-block;width:24px"></span>
+                   <span id="operator-tree_3_switch" title="" class="button level1 switch noline_docu" treenode_switch=""></span>
+                   <span id="operator-tree_3_ico" title="" treenode_ico="" class="button ico_docu fa fa-list-alt" style="padding-top: 8px;"></span>
+                   <span id="operator-tree_3_span" class="node_name">表写入数据库</span></a>
+               </li>
+            <li id="operator-tree_12" class="level0" tabindex="0" hidefocus="true" treenode="" style="display: block;">
+               <a id="operator-tree_12_a" class="level0 model-root" treenode_a="" onclick="" target="_blank" style="" title="属性设置" data-id="Attributes">
+               <span id="operator-tree_12_switch" title="" class="button level0 switch noline_close" treenode_switch=""></span>
+               <span id="operator-tree_12_ico" title="" treenode_ico="" class="button ico_close" style=""></span>
+               <span id="operator-tree_12_span" class="node_name">属性设置</span></a>
+               <ul id="operator-tree_12_ul" class="level0 " style="display:none">
+                 <li id="operator-tree_13" class="level1" tabindex="0" hidefocus="true" treenode="" style="border-width: 0px; display: block;">
+                   <a id="operator-tree_13_a" class="level1" treenode_a="" onclick="" target="_blank" style="" title="属性角色设定">
+                   <span style="display: inline-block;width:24px"></span><span id="operator-tree_13_switch" title="" class="button level1 switch noline_docu" treenode_switch=""></span>
+                   <span id="operator-tree_13_ico" title="" treenode_ico="" class="button ico_docu fa fa-file-text" style="padding-top: 8px;"></span>
+                   <span id="operator-tree_13_span" class="node_name">属性角色设定</span></a>
+                 </li>
+                 <li id="operator-tree_16" class="level1" tabindex="0" hidefocus="true" treenode="" style="border-width: 0px; display: block;">
+                 <a id="operator-tree_16_a" class="level1" treenode_a="" onclick="" target="_blank" style="" title="重命名表字段">
+                   <span style="display: inline-block;width:24px"></span>
+                   <span id="operator-tree_16_switch" title="" class="button level1 switch noline_docu" treenode_switch=""></span>
+                   <span id="operator-tree_16_ico" title="" treenode_ico="" class="button ico_docu fa fa-file-text" style="padding-top: 8px;"></span>
+                   <span id="operator-tree_16_span" class="node_name">重命名表字段</span></a>
+                 </li>
+               </ul>
+            </li>
+<!-- 管理  -->
+<ul id="operator-tree_132_ul" class="level0 " style="display:none">
+  <li id="operator-tree_133" class="level1" tabindex="0" hidefocus="true" treenode="" style="border-width: 0px; display: block;">
+    <a id="operator-tree_133_a" class="level1" treenode_a="" onclick="" target="_blank" style="" title="自定义二阶指数平滑">
+    <span style="display: inline-block;width:24px"></span>
+    <span id="operator-tree_133_switch" title="" class="button level1 switch noline_docu" treenode_switch=""></span>
+    <span id="operator-tree_133_ico" title="" treenode_ico="" class="button ico_docu fa fa-cubes" style="padding-top: 8px;"></span>
+    <span id="operator-tree_133_span" class="node_name">自定义二阶指数平滑</span>
+    </a>
+  </li>
+<!-- 实验--模型-->
+<div id="mod-tab" style="height: 100%; display: none;" aria-labelledby="ui-id-3" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="true">
+  <div class="input-group col-md-12 tabSearchDiv">
+    <input type="search" class="form-control" id="modSearch" pl_i18n="ict_oneminer_search_model" placeholder="搜索模型">
+  </div>
+  <span id="model-tree-noMatches" id_i18n="ict_oneminer_no_operator_found" style="display:none;color:red">无匹配算子</span>
+  <div id="mod-tree-div" class="op-mod-tree-div">
+    <ul id="model-tree" class="ztree pageLeft">
+      <li id="model-tree_1" class="level0" tabindex="0" hidefocus="true" treenode="" style="display: block;">
+        <a id="model-tree_1_a" class="level0 need-menu model-parent model-root" treenode_a="" onclick="" target="_blank" style="" title="Saved Models" data-id="Saved Models">
+          <span id="model-tree_1_switch" title="" class="button level0 switch noline_open" treenode_switch=""></span>
+          <span id="model-tree_1_ico" title="" treenode_ico="" class="button ico_open" style=""></span>
+          <span id="model-tree_1_span" class="node_name">Saved Models</span>
+        </a>
+       <ul id="model-tree_1_ul" class="level0 " style="">
+        <li id="model-tree_2" class="level1" tabindex="0" hidefocus="true" treenode="" style="border-width: 0px; display: block;">
+          <a id="model-tree_2_a" class="level1 need-menu model-leaf" treenode_a="" onclick="" target="_blank" style="" title="3" data-id="/admin/saved/hiddenCatalogFolder/3/SPARK202">
+            <span style="display: inline-block;width:24px"></span>
+            <span id="model-tree_2_switch" title="" class="button level1 switch noline_docu" treenode_switch=""></span>
+            <span id="model-tree_2_ico" title="" treenode_ico="" class="button ico_docu fa fa-puzzle-piece" style="padding-top: 8px;"></span>
+            <span id="model-tree_2_span" class="node_name">3</span>
+          </a>
+         </li>
+         <li id="model-tree_3" class="level1" tabindex="0" hidefocus="true" treenode="" style="border-width: 0px; display: block;">
+          <a id="model-tree_3_a" class="level1 need-menu model-leaf" treenode_a="" onclick="" target="_blank" style="" title="决策树 (1)" data-id="/admin/saved/hiddenCatalogFolder/决策树 (1)/SPARK202">
+            <span style="display: inline-block;width:24px"></span>
+            <span id="model-tree_3_switch" title="" class="button level1 switch noline_docu" treenode_switch=""></span>
+             <span id="model-tree_3_ico" title="" treenode_ico="" class="button ico_docu fa fa-puzzle-piece" style="padding-top: 8px;"></span>
+            <span id="model-tree_3_span" class="node_name">决策树 (1)</span>
+          </a>
+         </li>
+       </ul>
+      </li>
+      <li id="model-tree_4" class="level0" tabindex="0" hidefocus="true" treenode="" style="display: block;"><a id="model-tree_4_a" class="level0 model-root" treenode_a="" onclick="" target="_blank" style="" title="Trail Models" data-id="Trail Models">
+        <span id="model-tree_4_switch" title="" class="button level0 switch noline_open" treenode_switch=""></span>
+        <span id="model-tree_4_ico" title="" treenode_ico="" class="button ico_open" style=""></span>
+        <span id="model-tree_4_span" class="node_name">Trail Models</span></a><ul id="model-tree_4_ul" class="level0 " style="">
+        <li id="model-tree_5" class="level1" tabindex="0" hidefocus="true" treenode="" style="display: block;">
+          <a id="model-tree_5_a" class="level1 need-menu model-parent" treenode_a="" onclick="" target="_blank" style="" title="Classfication_Train_2_0" data-id="/admin/trail/Classfication_Train_2_0/SPARK202">
+            <span style="display: inline-block;width:24px"></span>
+            <span id="model-tree_5_switch" title="" class="button level1 switch noline_open" treenode_switch=""></span>
+            <span id="model-tree_5_ico" title="" treenode_ico="" class="button ico_open" style=""></span>
+            <span id="model-tree_5_span" class="node_name">Classfication_Train_2_0</span>
+          </a>
+          <ul id="model-tree_5_ul" class="level1 " style="">
+            <li id="model-tree_6" class="level2" tabindex="0" hidefocus="true" treenode="" style="border-width: 0px; display: block;">
+              <a id="model-tree_6_a" class="level2 need-menu model-leaf" treenode_a="" onclick="" target="_blank" style="" title="线性SVM" data-id="/admin/trail/Classfication_Train_2_0/线性SVM/SPARK202">
+                <span style="display: inline-block;width:48px"></span><span id="model-tree_6_switch" title="" class="button level2 switch noline_docu" treenode_switch=""></span>
+                <span id="model-tree_6_ico" title="" treenode_ico="" class="button ico_docu fa fa-puzzle-piece" style="padding-top: 8px;"></span>
+                <span id="model-tree_6_span" class="node_name">线性SVM</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </ul>
+  </div>
+</div>
+<div id="ascrail2007" class="nicescroll-rails nicescroll-rails-vr" style="width: 6px; z-index: auto; background: rgb(66, 79, 99); cursor: default; position: absolute; top: 102.188px; left: 230.391px; height: 524px; display: none; opacity: 0;">
+  <div class="nicescroll-cursors" style="position: relative; top: 0px; float: right; width: 6px; height: 87px; background-color: rgba(255, 255, 255, 0.2); border: 0px; background-clip: padding-box; border-radius: 0px;">
+  </div>
+</div>
+<div id="ascrail2007-hr" class="nicescroll-rails nicescroll-rails-hr" style="height: 6px; z-index: auto; background: rgb(66, 79, 99); top: 620.188px; left: 2.39062px; position: absolute; cursor: default; display: none; width: 228px; opacity: 0;">
+  <div class="nicescroll-cursors" style="position: absolute; top: 0px; height: 6px; width: 121px; background-color: rgba(255, 255, 255, 0.2); border: 0px; background-clip: padding-box; border-radius: 0px; left: 0px;">
+</div>
+</div>
+<div id="ascrail2012" class="nicescroll-rails nicescroll-rails-vr" style="width: 6px; z-index: auto; background: rgb(66, 79, 99); cursor: default; position: absolute; top: 78.1875px; left: 230.391px; height: 475px; opacity: 1;">
+  <div class="nicescroll-cursors" style="position: relative; top: 0px; float: right; width: 6px; height: 454px; background-color: rgba(255, 255, 255, 0.2); border: 0px; background-clip: padding-box; border-radius: 0px;">
+  </div>
+</div>
+<div id="ascrail2012-hr" class="nicescroll-rails nicescroll-rails-hr" style="height: 6px; z-index: auto; background: rgb(66, 79, 99); top: 547.188px; left: 2.39062px; position: absolute; cursor: default; display: none; width: 228px; opacity: 1;">
+  <div class="nicescroll-cursors" style="position: absolute; top: 0px; height: 6px; width: 234px; background-color: rgba(255, 255, 255, 0.2); border: 0px; background-clip: padding-box; border-radius: 0px; left: 0px;">
+  </div>
+</div>
+</div>
+<div id="center-panel" class="ui-layout-container ui-layout-pane ui-layout-pane-center ui-layout-pane-hover ui-layout-pane-center-hover ui-layout-pane-open-hover ui-layout-pane-center-open-hover" style="overflow: hidden; position: absolute; margin: 0px; left: 246px; right: 6px; top: 0px; bottom: 0px; height: 588px; width: 880px; z-index: 0; display: block; visibility: visible;">
+<div id="graph-panel" class="ui-layout-pane ui-layout-pane-center ui-layout-pane-hover ui-layout-pane-center-hover ui-layout-pane-open-hover ui-layout-pane-center-open-hover" style="position: absolute; margin: 0px; left: 0px; right: 0px; top: 0px; bottom: 6px; height: 581px; width: 880px; z-index: 0; display: block; visibility: visible;">
+<div class="title-bar" style="display:inline-block"><div id_i18n="ict_oneminer_process_title_process" style="display: inline">流程</div>
+  <div id="toolbar" style="float: right"><span id="download" class="fa fa-fw fa-download" style="display: none" aria-hidden="true" title="下载" id_i18n="ict_oneminer_process_toolbar_tooltip_download"></span>
+    <span id="save" class="fa fa-fw fa-save disabled" aria-hidden="true" title="保存" id_i18n="ict_oneminer_process_toolbar_tooltip_save"></span>
+    <span id="saveas" class="glyphicon glyphicon-floppy-save" aria-hidden="true" title="另存为实验" id_i18n="ict_oneminer_process_toolbar_tooltip_saveas"></span>
+    <span id="saveasTemplate" class="fa fa-folder-o" aria-hidden="true" title="另存为模板" id_i18n="ict_oneminer_process_toolbar_tooltip_saveasTemplate"></span>
+    <span id="run" class="fa fa-fw fa-caret-square-o-right" aria-hidden="true" title="运行" id_i18n="ict_oneminer_process_toolbar_tooltip_run"></span>
+    <span id="stop" class="fa fa-fw fa-stop" aria-hidden="true" title="停止" id_i18n="ict_oneminer_process_toolbar_tooltip_stop" style="display: none;"></span>
+    <span id="copy" class="fa fa-copy" aria-hidden="true" title="复制" id_i18n="ict_oneminer_process_toolbar_tooltip_copy"></span>
+    <span id="paste" class="fa fa-paste" aria-hidden="true" title="粘贴" id_i18n="ict_oneminer_process_toolbar_tooltip_paste"></span>
+    <span id="pan" class="fa fa-fw fa-hand-paper-o" aria-hidden="true" title="平移模式" id_i18n="ict_oneminer_process_toolbar_tooltip_pan"></span>
+    <span id="delete" class="fa fa-fw fa-remove" aria-hidden="true" title="删除" id_i18n="ict_oneminer_process_toolbar_tooltip_delete"></span>
+    <span id="zoomactual" class="fa fa-fw fa-search" aria-hidden="true" title="实际大小" id_i18n="ict_oneminer_process_toolbar_tooltip_actual"></span>
+    <span id="zoomin" class="fa fa-fw fa-search-plus" aria-hidden="true" title="放大" id_i18n="ict_oneminer_process_toolbar_tooltip_zoomin"></span>
+    <span id="zoomout" class="fa fa-fw fa-search-minus" aria-hidden="true" title="缩小" id_i18n="ict_oneminer_process_toolbar_tooltip_zoomout"></span>
+    <span id="fit" class="fa fa-fw fa-arrows" aria-hidden="true" title="自适应" id_i18n="ict_oneminer_process_toolbar_tooltip_fit"></span>
+    <span id="outline" class="glyphicon glyphicon-modal-window" aria-hidden="true" title="轮廓" id_i18n="ict_oneminer_process_toolbar_tooltip_outline"></span>
+  </div>
+</div>
+<div id="graph" oncontextmenu="return false;" style="position: relative; touch-action: none;"><svg style="width: 100%; height: 100%; display: block; min-width: 661px; min-height: 316px;">
+  <g><g></g><g>
+  <g transform="translate(0.5,0.5)" style="visibility: visible;">
+    <rect x="460" y="175" width="200" height="30" rx="15" ry="15" fill-opacity="0.2" fill="#000000" stroke="none" pointer-events="all"></rect>
+  </g>
+  <g style="">
+  <g transform="translate(460,176)">
+    <foreignobject style="overflow:visible;" pointer-events="all" width="200" height="28">
+      <div style="display:inline-block;font-size:11px;font-family:Arial,Helvetica;color:#FFFFFF;line-height:1.2;vertical-align:top;white-space:nowrap;text-align:center;">
+      <div class="bigBox"><div class="frontFontDiv">
+        <i class="fa fa-list-alt"></i>
+      </div>
+      <div class="operatorNameDiv" title="读SPARK表">读SPARK表</div>
+      <div class="backFontDiv success" title="执行成功">
+        <i class="fa fa-check-circle"></i>
+      </div>
+      </div>
+      </div>
+    </foreignobject>
+  </g></g>
+  <g transform="translate(0.5,0.5)" style="visibility: visible;">
+    <ellipse cx="565" cy="205" rx="5" ry="5" fill-opacity="0.8" fill="#fff" stroke="none" pointer-events="all"></ellipse>
+  </g>
+  <g transform="translate(0.5,0.5)" style="visibility: visible;">
+    <rect x="260" y="280" width="200" height="30" rx="15" ry="15" fill-opacity="0.2" fill="#000000" stroke="none" pointer-events="all"></rect>
+  </g>
+  <g style="">
+  <g transform="translate(260,281)">
+    <foreignobject style="overflow:visible;" pointer-events="all" width="200" height="28">
+      <div style="display:inline-block;font-size:11px;font-family:Arial,Helvetica;color:#FFFFFF;line-height:1.2;vertical-align:top;white-space:nowrap;text-align:center;">
+      <div class="bigBox"><div class="frontFontDiv">
+       <i class="fa fa-hourglass-half"></i>
+      </div>
+      <div class="operatorNameDiv" title="预测">预测</div>
+      <div class="backFontDiv failed" title="spark任务执行失败。">
+       <i class="fa fa-times-circle"></i>
+      </div>
+      </div></div>
+     </foreignobject> 
+   </g></g>
+   <g transform="translate(0.5,0.5)" style="visibility: visible;"><ellipse cx="345" cy="280" rx="5" ry="5" fill-opacity="0.8" fill="#fff" stroke="none" pointer-events="all"></ellipse></g>
+   <g transform="translate(0.5,0.5)" style="visibility: visible;"><ellipse cx="385" cy="280" rx="5" ry="5" fill-opacity="0.8" fill="#fff" stroke="none" pointer-events="all"></ellipse></g>
+   <g transform="translate(0.5,0.5)" style="visibility: visible;"><ellipse cx="365" cy="310" rx="5" ry="5" fill-opacity="0.8" fill="#fff" stroke="none" pointer-events="all"></ellipse></g>
+   <g transform="translate(0.5,0.5)" style="visibility: visible;">
+    <rect x="190" y="160" width="200" height="30" rx="15" ry="15" fill-opacity="0.2" fill="#000000" stroke="none" pointer-events="all"></rect>
+   </g>
+   <g style="">
+   <g transform="translate(190,161)">
+    <foreignobject style="overflow:visible;" pointer-events="all" width="200" height="28">
+     <div style="display:inline-block;font-size:11px;font-family:Arial,Helvetica;color:#FFFFFF;line-height:1.2;vertical-align:top;white-space:nowrap;text-align:center;">
+     <div class="bigBox"><div class="frontFontDiv"><i class="fa fa-puzzle-piece"></i></div>
+     <div class="operatorNameDiv" title="Model-决策树 (1)">Model-决策树 (1)</div>
+     <div class="backFontDiv success" title="执行成功">
+       <i class="fa fa-check-circle"></i>
+     </div></div></div>
+    </foreignobject></g></g>
+   <g transform="translate(0.5,0.5)" style="visibility: visible;"><ellipse cx="295" cy="190" rx="5" ry="5" fill-opacity="0.8" fill="#fff" stroke="none" pointer-events="all"></ellipse></g>
+   <g transform="translate(0.5,0.5)" style="visibility: visible;"><path d="M 295 195 Q 295 208.33 320 235 Q 345 261.67 345 275" fill="none" stroke="white" stroke-miterlimit="10" pointer-events="stroke" visibility="hidden" stroke-width="9"></path>
+     <path d="M 295 195 Q 295 208.33 320 235 Q 345 261.67 345 275" fill="none" stroke="#6482b9" stroke-miterlimit="10"></path></g>
+   <g transform="translate(0.5,0.5)" style="visibility: visible;"><path d="M 565 210 Q 565 258 475 242.5 Q 385 227 385 275" fill="none" stroke="white" stroke-miterlimit="10" pointer-events="stroke" visibility="hidden" stroke-width="9"></path>
+     <path d="M 565 210 Q 565 258 475 242.5 Q 385 227 385 275" fill="none" stroke="#6482b9" stroke-miterlimit="10"></path></g>
+   </g><g></g><g></g></g></svg></div>
+   <div class="loading-img"><div class="outer"></div>
+   <div class="inner"></div></div>
+   <div id="outlineContainer" class="hide" style="position: absolute; overflow: hidden; top: 36px; right: 0px; width: 200px; height: 140px; background: transparent; border-style: solid; border-color: black; touch-action: none;">
+     <svg shape-rendering="optimizeSpeed" image-rendering="optimizeSpeed" style="width: 100%; height: 100%; display: block; min-width: 2px; min-height: 12px;"><g><g></g><g><g transform="translate(0.5,0.5)" style="visibility: visible;">
+        <rect x="0.05" y="0.02" width="0.02" height="0" rx="0" ry="0" fill-opacity="0.2" fill="#000000" stroke="none" pointer-events="all"></rect></g>
+      <g transform="translate(0.5,0.5)" style="visibility: visible;"><ellipse cx="0" cy="0" rx="0.0005" ry="0.0005" fill-opacity="0.8" fill="#fff" stroke="none" pointer-events="all"></ellipse></g>
+      <g transform="translate(0.5,0.5)" style="visibility: visible;"><rect x="0.03" y="0.03" width="0.02" height="0" rx="0" ry="0" fill-opacity="0.2" fill="#000000" stroke="none" pointer-events="all"></rect></g>
+      <g transform="translate(0.5,0.5)" style="visibility: visible;"><ellipse cx="0" cy="0" rx="0.0005" ry="0.0005" fill-opacity="0.8" fill="#fff" stroke="none" pointer-events="all"></ellipse></g>
+      <g transform="translate(0.5,0.5)" style="visibility: visible;"><ellipse cx="0" cy="0" rx="0.0005" ry="0.0005" fill-opacity="0.8" fill="#fff" stroke="none" pointer-events="all"></ellipse></g>
+      <g transform="translate(0.5,0.5)" style="visibility: visible;"><ellipse cx="0" cy="0" rx="0.0005" ry="0.0005" fill-opacity="0.8" fill="#fff" stroke="none" pointer-events="all"></ellipse></g>
+      <g transform="translate(0.5,0.5)" style="visibility: visible;"><rect x="0.02" y="0.02" width="0.02" height="0" rx="0" ry="0" fill-opacity="0.2" fill="#000000" stroke="none" pointer-events="all"></rect></g>
+      <g transform="translate(0.5,0.5)" style="visibility: visible;"><ellipse cx="0" cy="0" rx="0.0005" ry="0.0005" fill-opacity="0.8" fill="#fff" stroke="none" pointer-events="all"></ellipse></g>
+      <g transform="translate(0.5,0.5)" style="visibility: visible;">
+        <path d="M 0.03 0.02 Q 0.03 10.02 0.03 0.02 Q 0.03 -9.97 0.03 0.03" fill="none" stroke="white" stroke-miterlimit="10" pointer-events="stroke" visibility="hidden" stroke-width="9"></path>
+        <path d="M 0.03 0.02 Q 0.03 10.02 0.03 0.02 Q 0.03 -9.97 0.03 0.03" fill="none" stroke="#6482b9" stroke-miterlimit="10"></path></g>
+      <g transform="translate(0.5,0.5)" style="visibility: visible;">
+        <path d="M 0.06 0.02 Q 0.06 10.02 0.05 0.02 Q 0.04 -9.97 0.04 0.03" fill="none" stroke="white" stroke-miterlimit="10" pointer-events="stroke" visibility="hidden" stroke-width="9"></path>
+        <path d="M 0.06 0.02 Q 0.06 10.02 0.05 0.02 Q 0.04 -9.97 0.04 0.03" fill="none" stroke="#6482b9" stroke-miterlimit="10"></path></g></g><g>
+        <g style="cursor: move; visibility: visible;" transform="translate(0.5,0.5)">
+          <rect x="0" y="0" width="0.09" height="0.06" fill="none" stroke="white" stroke-width="11" pointer-events="stroke" visibility="hidden"></rect>
+          <rect x="0" y="0" width="0.09" height="0.06" fill="none" stroke="#0099ff" stroke-width="3" pointer-events="all"></rect></g>
+      <g transform="translate(0.5,0.5)" style="cursor: nwse-resize; visibility: visible;">
+          <rect x="-3.91" y="-3.94" width="8" height="8" fill="#00ffff" stroke="#0033ff" pointer-events="all"></rect></g></g><g></g></g>
+     </svg>
+   </div>
+  </div>
+  <div id="log-panel" class="ui-layout-pane ui-layout-pane-south" style="position: absolute; margin: 0px; top: auto; bottom: 0px; left: 0px; right: 0px; width: auto; z-index: 0; height: 250px; display: none; visibility: visible;">
+  <div class="title-bar"><div id_i18n="ict_oneminer_process_title_log">日志</div></div>
+    <pre id="log-content">
+      2018-08-02 17:00:02 INFO:process 0801 start<br>
+      2018-08-02 17:00:02 INFO:Begin to exec operator:Model-决策树 (1)<br>
+      2018-08-02 17:00:02 INFO:Begin to exec operator:读SPARK表<br>
+      2018-08-02 17:00:02 INFO:End to exec operator:Model-决策树 (1), execute time is 0s<br>
+      2018-08-02 17:00:02 INFO:Fetch number of rows: 1000<br>
+      2018-08-02 17:00:03 INFO:table name: default.cancer<br>
+      2018-08-02 17:00:03 INFO:filter with: WHERE 1 = 1<br>     
+      2018-08-02 17:00:04 INFO:Spark application submitted.<br>
+      2018-08-02 17:00:06 INFO:Spark application state of DM_RetrieveSparkSQLOperator_20180802170003914: RUNNING|UNDEFINED<br>
+      2018-08-02 17:00:37 INFO:Spark application finished, state is FINISHED<br>
+      2018-08-02 17:00:37 INFO:Distributed final state: SUCCEEDED<br>
+      2018-08-02 17:00:39 INFO:End to exec operator:读SPARK表, execute time is 37s<br>
+      2018-08-02 17:00:39 INFO:Begin to exec operator:预测<br>
+      2018-08-02 17:00:40 INFO: table or view name:zadoop_v_762576cef3b4f51e1dab50783e10e769_out<br>
+      2018-08-02 17:00:40 INFO: file path:/saveModelPath/admin/saved/hiddenCatalogFolder/决策树 (1)/SPARK202/9999999999999<br>
+      2018-08-02 17:00:41 INFO:Spark application submitted.<br>2018-08-02 17:00:42 INFO:Spark application state of DM_Predicting_20180802170040782: RUNNING|UNDEFINED<br>
+      2018-08-02 17:01:04 INFO:Spark application finished, state is FINISHED<br>
+      2018-08-02 17:01:04 INFO:Distributed final state: FAILED<br>
+      2018-08-02 17:01:04 ERROR:Fail to exec operator:预测, execute time is 24s<br>
+      2018-08-02 17:01:04 INFO:Process 0801 finished failed after 62s<br>
+    </pre>
+   </div>
+   <div id="confirm-dialog" title="Confirm"></div>
+   <div id="attributesDialog" style="display:none" title="[ict_oneminer_process_set_procee_name]" id_i18n="ict_oneminer_process_set_procee_name">
+   <div class="block_out"><div class="block_title">Attributes</div>
+     <div class="input-group">
+       <input id="unselected-filter" type="search" class="form-control" placeholder="Search">
+     </div>
+     <ul id="unselected-attr" class="connected"></ul>
+   </div>
+   <div class="block_center">
+     <button id="select" class="btn dialogSelectBtn"><span class="fa fa-angle-right"></span></button><br>
+     <button id="unselect" class="btn dialogSelectBtn"><span class="fa fa-angle-left"></span></button>
+   </div>
+   <div class="block_out"><div class="block_title">Selected Attributes</div>
+     <div class="input-group"><input id="selected-filter" type="search" class="form-control" placeholder="Search"></div>
+     <ul id="selected-attr" class="connected"></ul>
+   </div></div>
+   <div title="Slide Open" id="log-panel-resizer" class="ui-layout-resizer ui-layout-resizer-south ui-draggable-handle ui-layout-resizer-closed ui-layout-resizer-south-closed ui-draggable-disabled" style="cursor: pointer; position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; bottom: 0px; width: 880px; height: 6px; left: 0px;">
+   <div id="log-panel-toggler" class="ui-layout-toggler ui-layout-toggler-south ui-layout-toggler-closed ui-layout-toggler-south-closed" title="Open" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; width: 50px; height: 6px; left: 415px; top: 0px;">
+     <span class="content content-open" style="display: none; margin-left: 1px;">
+       <div class="ui-icon"></div>
+     </span>
+     <span class="content content-closed" style="display: block; margin-left: 1px;">
+       <div class="ui-icon"></div>
+     </span>
+   </div></div></div>
+   <div id="east-panel" class="ui-layout-pane ui-layout-pane-east" style="position: absolute; margin: 0px; left: auto; right: 0px; top: 0px; bottom: 0px; height: 588px; z-index: 0; width: 260px; display: none; visibility: visible;">
+   <div id="param-tabs" class="container-fluid ui-tabs ui-corner-all ui-widget ui-widget-content">
+     <ul role="tablist" class="ui-tabs-nav ui-corner-all ui-helper-reset ui-helper-clearfix ui-widget-header">
+       <li role="tab" tabindex="0" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active" aria-controls="properties" aria-labelledby="ui-id-4" aria-selected="true" aria-expanded="true">
+         <a href="http://10.43.139.201:57280/aie/index.html#properties" id_i18n="ict_oneminer_config_param" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-4">参数配置</a></li>
+       <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="config" aria-labelledby="ui-id-5" aria-selected="false" aria-expanded="false" style="display: none;">
+         <a href="http://10.43.139.201:57280/aie/index.html#config" id_i18n="ict_oneminer_config_resource" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-5">资源配置</a></li>
+     </ul>
+   <div class="tab-content" style="height: calc(100% - 40px)">
+   <div id="properties" style="height: 100%; overflow: hidden; outline: none; width: 254px;" aria-labelledby="ui-id-4" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="false" tabindex="5">
+     <h6>Process: 0801</h6><hr><div class="form-vertical"><div class="form-group form-group-sm"><label class="control-label" style="text-align:left;" for="zadoop_connection_id" title="connection id">connection id</label>
+       <div class=""><select class="form-control" id="zadoop_connection_id">
+         <option selected="selected">spark2.0.2</option>
+         <option>spark1.4.1</option></select>
+      </div></div>
+      <div class="form-group form-group-sm"><label class="control-label" style="text-align:left;" for="spark_log_level" title="spark log level">spark log level</label>
+      <div class=""><select class="form-control" id="spark_log_level"> 
+        <option>INFO</option>
+        <option selected="selected">WARN</option>
+        <option>ERROR</option></select>
+      </div></div>
+      <div class="form-group form-group-sm"><label class="control-label" style="text-align:left;" for="type" title="the type of process">process type</label>
+      <div class=""><div class="clearfix" id="type"><div class="pull-left type-circle type-params process-type-1 ">
+            <div class="inner-circle"></div>
+            </div><div class="pull-left type-circle type-params process-type-2 ">
+            <div class="inner-circle"></div>
+            </div><div class="pull-left type-circle type-params process-type-3 ">
+            <div class="inner-circle"></div>
+            </div><div class="pull-left type-circle type-params process-type-4 ">
+            <div class="inner-circle"></div>
+            </div><div class="pull-left type-circle type-params process-type-5 ">
+            <div class="inner-circle"></div>
+            </div>
+           </div>
+          </div>
+         </div>
+         <div class="form-group form-group-sm">
+           <label class="control-label" style="text-align:left;" for="select_schedule" title="generate a timed task execute in the background">timed execution</label>
+           <div class="inlineCheckBox">
+             <span class="spanCheckbox"><input type="checkbox" class="pull-left" id="select_schedule"><label for="select_schedule"></label></span>
+           </div>
+         </div>
+         <div class="form-group form-group-sm">
+           <label class="control-label" style="text-align:left;" for="send_mail" title="send mail notifications">send mail</label>
+           <div class="inlineCheckBox">
+             <span class="spanCheckbox"><input type="checkbox" class="pull-left" id="send_mail">
+               <label for="send_mail"></label>
+             </span>
+           </div>
+         </div>
+         <div class="form-group form-group-sm">
+           <label class="control-label" style="text-align:left;" for="zaip_id" title="zaip id">zaip id</label>
+           <div class=""><select class="form-control" id="zaip_id">
+             <option selected="selected">zaip1</option><option>zaip2</option></select>
+           </div>
+         </div>
+         <div class="form-group form-group-sm">
+           <label class="control-label" style="text-align:left;" for="variable_settings" title="This parameter defines macro variables of the process. The variable must begins with a english letter and contains only english letters, numbers and underlines.">variable settings</label><div class=""><button id="variable_settings" class="btn btn-primary form-control">Edit List</button></div></div></div><br></div><div id="config" style="height: 100%; display: none;" aria-labelledby="ui-id-5" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="true"></div></div></div><div id="ascrail2008" class="nicescroll-rails nicescroll-rails-vr" style="width: 6px; z-index: auto; background: rgb(66, 79, 99); cursor: default; position: absolute; top: 36.1875px; left: 250.391px; height: 584px; display: none;"><div class="nicescroll-cursors" style="position: relative; top: 0px; float: right; width: 6px; height: 0px; background-color: rgba(255, 255, 255, 0.2); border: 0px; background-clip: padding-box; border-radius: 0px;"></div></div><div id="ascrail2008-hr" class="nicescroll-rails nicescroll-rails-hr" style="height: 6px; z-index: auto; background: rgb(66, 79, 99); top: 614.188px; left: 3.39062px; position: absolute; cursor: default; display: none;"><div class="nicescroll-cursors" style="position: absolute; top: 0px; height: 6px; width: 0px; background-color: rgba(255, 255, 255, 0.2); border: 0px; background-clip: padding-box; border-radius: 0px;"></div></div></div><div id="west-panel-resizer" class="ui-layout-resizer ui-layout-resizer-west ui-draggable-handle ui-layout-resizer-open ui-layout-resizer-west-open" title="Resize" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; cursor: w-resize; left: 240px; height: 588px; width: 6px; top: 0px;"><div id="west-panel-toggler" class="ui-layout-toggler ui-layout-toggler-west ui-layout-toggler-open ui-layout-toggler-west-open" title="Close" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; height: 50px; width: 6px; top: 269px; left: 0px;"><span class="content content-open" style="display: block; margin-top: 15px;"><div class="ui-icon"></div></span><span class="content content-closed" style="display: none; margin-top: 15px;"><div class="ui-icon"></div></span></div></div><div id="east-panel-resizer" class="ui-layout-resizer ui-layout-resizer-east ui-layout-resizer-closed ui-layout-resizer-east-closed" title="Slide Open" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; right: 0px; cursor: pointer; height: 588px; width: 6px; top: 0px;"><div id="east-panel-toggler" class="ui-layout-toggler ui-layout-toggler-east ui-layout-toggler-closed ui-layout-toggler-east-closed" title="Open" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; height: 50px; width: 6px; top: 269px; left: 0px;"><span class="content content-open" style="display: none; margin-top: 15px;"><div class="ui-icon"></div></span><span class="content content-closed" style="display: block; margin-top: 15px;"><div class="ui-icon"></div></span></div></div></div><div id="manage" tabindex="2" style="display: none; overflow: hidden; outline: none;"><div id="diyOperatorManagementDiv"><div id="buttonDiv"><button id="importDiyOperator" class="btn btn-primary btn-sm mr5" id_i18n="ict_oneminer_button_import_diy_operator">导入算子</button><div class="dropdown download-div mr5"><button class="btn btn-primary btn-sm dropdown-toggle" id="downloadMenu" type="button"><i class="fa fa-download"></i> <span id_i18n="ict_oneminer_button_download_demo">下载模板</span> <span class="caret"></span></button><ul class="dropdown-menu download-template" aria-labelledby="downloadMenu" style="width: 118px;"><li><a data-type="SPARK141" href="http://10.43.139.201:57280/aie/index.html#">Spark141</a></li><li><a data-type="SPARK202" href="http://10.43.139.201:57280/aie/index.html#">Spark202</a></li><li><a data-type="SPARK141_SPARK202" href="http://10.43.139.201:57280/aie/index.html#">Spark141,Spark202</a></li><li><a data-type="PySpark141" href="http://10.43.139.201:57280/aie/index.html#">PySpark141</a></li></ul></div><button id="batchDelete" class="btn btn-primary btn-sm" id_i18n="ict_oneminer_button_delete" disabled="disabled">删除</button></div><div><div id="diyOperatorTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="search"><div id="diyOperatorTable_filter" class="dataTables_filter"><label><input type="search" class="form-control input-sm" placeholder="" aria-controls="diyOperatorTable"></label></div></div><table id="diyOperatorTable" class="table table-bordered home-table no-footer dataTable" role="grid" aria-describedby="diyOperatorTable_info" style=""><thead><tr role="row"><th id="table-operator-checked" class="sorting_disabled" tabindex="0" aria-controls="diyOperatorTable" rowspan="1" colspan="1" aria-label="" style="width: 80px;"><input type="checkbox" id="deleteCheck"><label for="deleteCheck"></label></th><th id="table-operator-name" class="sorting" tabindex="0" aria-controls="diyOperatorTable" rowspan="1" colspan="1" aria-label="算子名: activate to sort column ascending" style="width: 20%;"><span class="block" id_i18n="ict_oneminer_table_head_operator_name">算子名</span></th><th id="table-operator-executeFrame" class="sorting" tabindex="0" aria-controls="diyOperatorTable" rowspan="1" colspan="1" aria-label="执行框架: activate to sort column ascending" style="width: 15%;"><span class="block" id_i18n="ict_oneminer_table_head_operator_executeFrame">执行框架</span></th><th id="table-class-name" class="sorting" tabindex="0" aria-controls="diyOperatorTable" rowspan="1" colspan="1" aria-label="入口类名: activate to sort column ascending" style="width: 205px;"><span class="block" id_i18n="ict_oneminer_table_head_operator_classname">入口类名</span></th><th id="table-createtime" class="sorting" tabindex="0" aria-controls="diyOperatorTable" rowspan="1" colspan="1" aria-label="创建时间: activate to sort column ascending" style="width: 206px;"><span class="block" id_i18n="ict_oneminer_table_head_operator_create_time">创建时间</span></th><th id="table-manage" class="sorting_disabled" tabindex="0" aria-controls="diyOperatorTable" rowspan="1" colspan="1" aria-label="管理" style="width: 123px;"><span class="block" id_i18n="ict_oneminer_table_head_operator_manage">管理</span></th></tr></thead><tbody><tr role="row" class="odd"><td><input type="checkbox" class="check-oper" data-name="SecondExponentialSmoothingDiy" id="diyOper0" style="display:none"><label for="diyOper0"></label></td><td><div class="text-ellipsis co-max-width" title="自定义二阶指数平滑">自定义二阶指数平滑</div></td><td><div class="text-ellipsis co-max-width" title="SPARK202">SPARK202</div></td><td>com.zte.dap.miner.algorithm.diy.SecondExponentialSmoothingOperator</td><td>2018-08-02 16:04:14.0</td><td><a class="para-manage-export" title="导出" data-name="自定义二阶指数平滑"><i class="fa fa-fw fa-download"></i></a>
+                <a class="para-manage-del" style="padding-left: 15px" title="删除"><i class="fa fa-trash-o"></i></a></td></tr><tr role="row" class="even"><td><input type="checkbox" class="check-oper" data-name="vmax-coo-filterFreq" id="diyOper1" style="display:none"><label for="diyOper1"></label></td><td><div class="text-ellipsis co-max-width" title="CCO找到最强和次强邻区">CCO找到最强和次强邻区</div></td><td><div class="text-ellipsis co-max-width" title="SPARK202">SPARK202</div></td><td>com.zte.bigdata.vmax.app.cco.client.FilterFreqClient</td><td>2018-08-02 16:04:14.0</td><td><a class="para-manage-export" title="导出" data-name="CCO找到最强和次强邻区"><i class="fa fa-fw fa-download"></i></a>
+                <a class="para-manage-del" style="padding-left: 15px" title="删除"><i class="fa fa-trash-o"></i></a></td></tr><tr role="row" class="odd"><td><input type="checkbox" class="check-oper" data-name="vmax-cco-Simulate" id="diyOper2" style="display:none"><label for="diyOper2"></label></td><td><div class="text-ellipsis co-max-width" title="vmax-cco-Simulate">vmax-cco-Simulate</div></td><td><div class="text-ellipsis co-max-width" title="SPARK202">SPARK202</div></td><td>com.zte.bigdata.vmax.app.cco.client.Simulate</td><td>2018-08-02 16:04:14.0</td><td><a class="para-manage-export" title="导出" data-name="vmax-cco-Simulate"><i class="fa fa-fw fa-download"></i></a>
+                <a class="para-manage-del" style="padding-left: 15px" title="删除"><i class="fa fa-trash-o"></i></a></td></tr><tr role="row" class="even"><td><input type="checkbox" class="check-oper" data-name="prepareDataForWebGis" id="diyOper3" style="display:none"><label for="diyOper3"></label></td><td><div class="text-ellipsis co-max-width" title="prepareDataForWebGis">prepareDataForWebGis</div></td><td><div class="text-ellipsis co-max-width" title="SPARK202">SPARK202</div></td><td>com.zte.bigdata.vmax.app.cco.client.prepareData</td><td>2018-08-02 16:04:14.0</td><td><a class="para-manage-export" title="导出" data-name="prepareDataForWebGis"><i class="fa fa-fw fa-download"></i></a>
+                <a class="para-manage-del" style="padding-left: 15px" title="删除"><i class="fa fa-trash-o"></i></a></td></tr><tr role="row" class="odd"><td><input type="checkbox" class="check-oper" data-name="vmax-coo-oes2table" id="diyOper4" style="display:none"><label for="diyOper4"></label></td><td><div class="text-ellipsis co-max-width" title="CCO网管数据入库">CCO网管数据入库</div></td><td><div class="text-ellipsis co-max-width" title="SPARK202">SPARK202</div></td><td>com.zte.bigdata.vmax.app.cco.client.OES2TableClient</td><td>2018-08-02 16:04:14.0</td><td><a class="para-manage-export" title="导出" data-name="CCO网管数据入库"><i class="fa fa-fw fa-download"></i></a>
+                <a class="para-manage-del" style="padding-left: 15px" title="删除"><i class="fa fa-trash-o"></i></a></td></tr><tr role="row" class="even"><td><input type="checkbox" class="check-oper" data-name="vmax-cco-clacSinrAndRsrpC0192" id="diyOper5" style="display:none"><label for="diyOper5"></label></td><td><div class="text-ellipsis co-max-width" title="计算寻优前后以及预测的rsrp、sinr,C0192">计算寻优前后以及预测的rsrp、sinr,C0192</div></td><td><div class="text-ellipsis co-max-width" title="SPARK141,SPARK202">SPARK141,SPARK202</div></td><td>com.zte.bigdata.vmax.app.cco.client.CalcSinrAndRsrpC0192Client</td><td>2018-08-02 16:04:14.0</td><td><a class="para-manage-export" title="导出" data-name="计算寻优前后以及预测的rsrp、sinr,C0192"><i class="fa fa-fw fa-download"></i></a>
+                <a class="para-manage-del" style="padding-left: 15px" title="删除"><i class="fa fa-trash-o"></i></a></td></tr><tr role="row" class="odd"><td><input type="checkbox" class="check-oper" data-name="OptimizationNew" id="diyOper6" style="display:none"><label for="diyOper6"></label></td><td><div class="text-ellipsis co-max-width" title="自定义寻优算子New">自定义寻优算子New</div></td><td><div class="text-ellipsis co-max-width" title="SPARK141">SPARK141</div></td><td>com.zte.dap.miner.algorithm.diy.OptimizationOperatorNew</td><td>2018-08-02 16:04:14.0</td><td><a class="para-manage-export" title="导出" data-name="自定义寻优算子New"><i class="fa fa-fw fa-download"></i></a>
+                <a class="para-manage-del" style="padding-left: 15px" title="删除"><i class="fa fa-trash-o"></i></a></td></tr><tr role="row" class="even"><td><input type="checkbox" class="check-oper" data-name="vmax-cco-clacSinrAndRsrp" id="diyOper7" style="display:none"><label for="diyOper7"></label></td><td><div class="text-ellipsis co-max-width" title="计算寻优前后以及预测的rsrp、sinr">计算寻优前后以及预测的rsrp、sinr</div></td><td><div class="text-ellipsis co-max-width" title="SPARK141,SPARK202">SPARK141,SPARK202</div></td><td>com.zte.bigdata.vmax.app.cco.client.CalcSinrAndRsrpClient</td><td>2018-08-02 16:04:14.0</td><td><a class="para-manage-export" title="导出" data-name="计算寻优前后以及预测的rsrp、sinr"><i class="fa fa-fw fa-download"></i></a>
+                <a class="para-manage-del" style="padding-left: 15px" title="删除"><i class="fa fa-trash-o"></i></a></td></tr><tr role="row" class="odd"><td><input type="checkbox" class="check-oper" data-name="vmax-coo-dbscan" id="diyOper8" style="display:none"><label for="diyOper8"></label></td><td><div class="text-ellipsis co-max-width" title="DBASCAN算法">DBASCAN算法</div></td><td><div class="text-ellipsis co-max-width" title="SPARK202">SPARK202</div></td><td>com.zte.bigdata.vmax.cco.client.DBSCANClient</td><td>2018-08-02 16:04:14.0</td><td><a class="para-manage-export" title="导出" data-name="DBASCAN算法"><i class="fa fa-fw fa-download"></i></a>
+                <a class="para-manage-del" style="padding-left: 15px" title="删除"><i class="fa fa-trash-o"></i></a></td></tr><tr role="row" class="even"><td><input type="checkbox" class="check-oper" data-name="StretMergeData2" id="diyOper9" style="display:none"><label for="diyOper9"></label></td><td><div class="text-ellipsis co-max-width" title="远程电子下倾角自调节算法的数据合并(Spark2)">远程电子下倾角自调节算法的数据合并(Spark2)</div></td><td><div class="text-ellipsis co-max-width" title="SPARK202">SPARK202</div></td><td>com.zte.dap.miner.algorithm.stmergedata.StMergeData2Operator</td><td>2018-08-02 16:04:14.0</td><td><a class="para-manage-export" title="导出" data-name="远程电子下倾角自调节算法的数据合并(Spark2)"><i class="fa fa-fw fa-download"></i></a>
+                <a class="para-manage-del" style="padding-left: 15px" title="删除"><i class="fa fa-trash-o"></i></a></td></tr></tbody></table><div class="diyTableBottom"><div class="dataTables_info" id="diyOperatorTable_info" role="status" aria-live="polite">共 21 条记录 &nbsp;&nbsp; 第 1 页 / 共 3 页</div><div class="dataTables_paginate paging_full" id="diyOperatorTable_paginate"><ul class="pagination"><li class="paginate_button first disabled" id="diyOperatorTable_first"><a href="http://10.43.139.201:57280/aie/index.html#" aria-controls="diyOperatorTable" data-dt-idx="0" tabindex="0">首页</a></li><li class="paginate_button previous disabled" id="diyOperatorTable_previous"><a href="http://10.43.139.201:57280/aie/index.html#" aria-controls="diyOperatorTable" data-dt-idx="1" tabindex="0">上一页</a></li><li class="paginate_button next" id="diyOperatorTable_next"><a href="http://10.43.139.201:57280/aie/index.html#" aria-controls="diyOperatorTable" data-dt-idx="2" tabindex="0">下一页</a></li><li class="paginate_button last" id="diyOperatorTable_last"><a href="http://10.43.139.201:57280/aie/index.html#" aria-controls="diyOperatorTable" data-dt-idx="3" tabindex="0">末页</a></li></ul></div><div class="dataTables_length" id="diyOperatorTable_length"><label>每页显示  <select name="diyOperatorTable_length" aria-controls="diyOperatorTable" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label></div></div></div></div></div></div><div id="log" class="wrapper" tabindex="3" style="display: none; overflow: hidden; outline: none;"><ul class="filter-condition form-group form-group-sm"><li><label id_i18n="ict_oneminer_log_lable_time">时间：</label><input id="startTime" class="form-control date-time hasDatepicker"> <i class="fa fa-calendar log-calendar"></i><label id="timeTo" id_i18n="ict_oneminer_log_lable_time_to">至</label><input id="endTime" class="form-control date-time hasDatepicker"> <i class="fa fa-calendar log-calendar"></i><ul class="select-time"><li><a class="block select-time-item" data-type="thirtyMinutes" id_i18n="ict_oneminer_log_thirty_minutes">30分钟</a></li><li><a class="block select-time-item" data-type="oneHour" id_i18n="ict_oneminer_log_one_hour">1小时</a></li><li><a class="block select-time-item" data-type="twoHours" id_i18n="ict_oneminer_log_two_hours">2小时</a></li><li><a class="block select-time-item" data-type="sixHours" id_i18n="ict_oneminer_log_six_hours">6小时</a></li><li class="time-selected"><a class="block select-time-item" id="oneDay" data-type="oneDay" id_i18n="ict_oneminer_log_one_day">1天</a></li><li><a class="block select-time-item" data-type="oneWeek" id_i18n="ict_oneminer_log_one_week">1周</a></li></ul><button id="searchLogBtn" class="btn btn-primary btn-sm" id_i18n="ict_oneminer_btn_log_search">搜索</button> <a href="http://10.43.139.201:57280/aie/index.html#" id="senior" id_i18n="ict_oneminer_log_lable_senior">高级</a></li><li class="other-options"><label id_i18n="ict_oneminer_log_lable_user">用户名：</label><input id="user" class="form-control"><label id_i18n="ict_oneminer_log_lable_address">IP地址：</label><input id="ip" class="form-control"><label id_i18n="ict_oneminer_log_lable_operate">操作：</label><input id="operate" class="form-control"><label id_i18n="ict_oneminer_log_lable_level">日志级别：</label><select id="level" class="form-control"><option value="1" id_i18n="ict_oneminer_log_level_very_important">非常重要</option><option value="2" id_i18n="ict_oneminer_log_level_important">重要</option><option value="3" id_i18n="ict_oneminer_log_level_notice">注意</option><option value="4" id_i18n="ict_oneminer_log_level_normal">普通</option><option value="" selected="selected" id_i18n="ict_oneminer_log_level_all">所有</option></select></li></ul><div id="logTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="search"></div><table id="logTable" class="table table-bordered no-footer dataTable" role="grid" aria-describedby="logTable_info" style=""><thead><tr role="row"><th class="sorting_desc" tabindex="0" aria-controls="logTable" rowspan="1" colspan="1" aria-label="时间: activate to sort column ascending" style="width: 221px;" aria-sort="descending"><span id_i18n="ict_oneminer_table_head_time">时间</span></th><th class="sorting" tabindex="0" aria-controls="logTable" rowspan="1" colspan="1" aria-label="级别: activate to sort column ascending" style="width: 221px;"><span id_i18n="ict_oneminer_table_head_level">级别</span></th><th class="sorting" tabindex="0" aria-controls="logTable" rowspan="1" colspan="1" aria-label="用户: activate to sort column ascending" style="width: 221px;"><span id_i18n="ict_oneminer_table_head_username">用户</span></th><th class="sorting_disabled" tabindex="0" aria-controls="logTable" rowspan="1" colspan="1" aria-label="日志内容" style="width: 50%;"><span id_i18n="ict_oneminer_table_head_log_content">日志内容</span></th></tr></thead><tbody><tr role="row" class="odd"><td class="sorting_1">2018-08-02 17:59:31.0</td><td>普通</td><td>lyyyy</td><td><div class="log-content-div"><div class="ip-div"><span>主机：</span>   10.43.165.142</div>
+            <div class="log-operate-div text-ellipsis"><span>操作：</span>   <span title="execute process">execute process</span></div>
+            <div class="resulu-div"><span>结果：</span>   success</div>
+            <div class="detail-div"><a id="detailOperate"><i class="fa fa-chevron-right icon-rotate"></i>  <span id="detailWord">收起详情</span></a></div>
+            <div class="log-detail" style="display: block;">processName=211221,topic=/61a3444a22e4263766a0ac74c70dd430,stopOperator=null,execType=all,owner=lyyyy,userId=lyyyy</div></div></td></tr><tr role="row" class="even"><td class="sorting_1">2018-08-02 17:58:59.0</td><td>普通</td><td>lyyyy</td><td><div class="log-content-div"><div class="ip-div"><span>主机：</span>   10.43.165.142</div>
+            <div class="log-operate-div text-ellipsis"><span>操作：</span>   <span title="execute process">execute process</span></div>
+            <div class="resulu-div"><span>结果：</span>   success</div>
+            <div class="detail-div"><a id="detailOperate"><i class="fa fa-chevron-right"></i>  <span id="detailWord">展开详情</span></a></div>
+            <div class="log-detail">processName=211221,topic=/61a3444a22e4263766a0ac74c70dd430,stopOperator=null,execType=all,owner=lyyyy,userId=lyyyy</div></div></td></tr><tr role="row" class="odd"><td class="sorting_1">2018-08-02 17:58:29.0</td><td>普通</td><td>lyyyy</td><td><div class="log-content-div"><div class="ip-div"><span>主机：</span>   10.43.165.142</div>
+            <div class="log-operate-div text-ellipsis"><span>操作：</span>   <span title="execute process">execute process</span></div>
+            <div class="resulu-div"><span>结果：</span>   success</div>
+            <div class="detail-div"><a id="detailOperate"><i class="fa fa-chevron-right"></i>  <span id="detailWord">展开详情</span></a></div>
+            <div class="log-detail">processName=211221,topic=/61a3444a22e4263766a0ac74c70dd430,stopOperator=null,execType=all,owner=lyyyy,userId=lyyyy</div></div></td></tr><tr role="row" class="even"><td class="sorting_1">2018-08-02 17:57:14.0</td><td>普通</td><td>lyyyy</td><td><div class="log-content-div"><div class="ip-div"><span>主机：</span>   10.43.165.142</div>
+            <div class="log-operate-div text-ellipsis"><span>操作：</span>   <span title="execute process">execute process</span></div>
+            <div class="resulu-div"><span>结果：</span>   success</div>
+            <div class="detail-div"><a id="detailOperate"><i class="fa fa-chevron-right"></i>  <span id="detailWord">展开详情</span></a></div>
+            <div class="log-detail">processName=211221,topic=/61a3444a22e4263766a0ac74c70dd430,stopOperator=null,execType=all,owner=lyyyy,userId=lyyyy</div></div></td></tr><tr role="row" class="odd"><td class="sorting_1">2018-08-02 17:56:29.0</td><td>普通</td><td>lyyyy</td><td><div class="log-content-div"><div class="ip-div"><span>主机：</span>   10.43.165.142</div>
+            <div class="log-operate-div text-ellipsis"><span>操作：</span>   <span title="execute process">execute process</span></div>
+            <div class="resulu-div"><span>结果：</span>   success</div>
+            <div class="detail-div"><a id="detailOperate"><i class="fa fa-chevron-right"></i>  <span id="detailWord">展开详情</span></a></div>
+            <div class="log-detail">processName=211221,topic=/61a3444a22e4263766a0ac74c70dd430,stopOperator=null,execType=all,owner=lyyyy,userId=lyyyy</div></div></td></tr><tr role="row" class="even"><td class="sorting_1">2018-08-02 17:50:51.0</td><td>普通</td><td>lyyyy</td><td><div class="log-content-div"><div class="ip-div"><span>主机：</span>   10.43.165.142</div>
+            <div class="log-operate-div text-ellipsis"><span>操作：</span>   <span title="execute process">execute process</span></div>
+            <div class="resulu-div"><span>结果：</span>   success</div>
+            <div class="detail-div"><a id="detailOperate"><i class="fa fa-chevron-right"></i>  <span id="detailWord">展开详情</span></a></div>
+            <div class="log-detail">processName=211221,topic=/61a3444a22e4263766a0ac74c70dd430,stopOperator=null,execType=all,owner=lyyyy,userId=lyyyy</div></div></td></tr><tr role="row" class="odd"><td class="sorting_1">2018-08-02 17:50:36.0</td><td>普通</td><td>lyyyy</td><td><div class="log-content-div"><div class="ip-div"><span>主机：</span>   10.43.165.142</div>
+            <div class="log-operate-div text-ellipsis"><span>操作：</span>   <span title="execute process">execute process</span></div>
+            <div class="resulu-div"><span>结果：</span>   success</div>
+            <div class="detail-div"><a id="detailOperate"><i class="fa fa-chevron-right"></i>  <span id="detailWord">展开详情</span></a></div>
+            <div class="log-detail">processName=211221,topic=/61a3444a22e4263766a0ac74c70dd430,stopOperator=null,execType=all,owner=lyyyy,userId=lyyyy</div></div></td></tr><tr role="row" class="even"><td class="sorting_1">2018-08-02 17:48:26.0</td><td>普通</td><td>admin</td><td><div class="log-content-div"><div class="ip-div"><span>主机：</span>   10.37.52.143</div>
+            <div class="log-operate-div text-ellipsis"><span>操作：</span>   <span title="execute process">execute process</span></div>
+            <div class="resulu-div"><span>结果：</span>   success</div>
+            <div class="detail-div"><a id="detailOperate"><i class="fa fa-chevron-right"></i>  <span id="detailWord">展开详情</span></a></div>
+            <div class="log-detail">processName=telkomsel_weight,topic=/8904bfe6fa20b00ca0a5b09dfafbe50a,stopOperator=1,execType=stop,owner=admin,userId=admin</div></div></td></tr><tr role="row" class="odd"><td class="sorting_1">2018-08-02 17:47:33.0</td><td>普通</td><td>admin</td><td><div class="log-content-div"><div class="ip-div"><span>主机：</span>   10.37.52.143</div>
+            <div class="log-operate-div text-ellipsis"><span>操作：</span>   <span title="execute process">execute process</span></div>
+            <div class="resulu-div"><span>结果：</span>   success</div>
+            <div class="detail-div"><a id="detailOperate"><i class="fa fa-chevron-right"></i>  <span id="detailWord">展开详情</span></a></div>
+            <div class="log-detail">processName=telkomsel_weight,topic=/8904bfe6fa20b00ca0a5b09dfafbe50a,stopOperator=null,execType=all,owner=admin,userId=admin</div></div></td></tr><tr role="row" class="even"><td class="sorting_1">2018-08-02 17:47:31.0</td><td>普通</td><td>admin</td><td><div class="log-content-div"><div class="ip-div"><span>主机：</span>   10.37.52.143</div>
+            <div class="log-operate-div text-ellipsis"><span>操作：</span>   <span title="add process">add process</span></div>
+            <div class="resulu-div"><span>结果：</span>   success</div>
+            <div class="detail-div"><a id="detailOperate"><i class="fa fa-chevron-right"></i>  <span id="detailWord">展开详情</span></a></div>
+            <div class="log-detail">processName=telkomsel_weight</div> 
+          </div></td>
+         </tr>
+       </tbody>
+      </table>
+      <div class="diyTableBottom"><div class="dataTables_info" id="logTable_info" role="status" aria-live="polite">共 471 条记录 &nbsp;&nbsp; 第 1 页 / 共 48 页</div>
+      <div class="dataTables_paginate paging_full" id="logTable_paginate">
+        <ul class="pagination">
+          <li class="paginate_button first disabled" id="logTable_first">
+            <a href="http://10.43.139.201:57280/aie/index.html#" aria-controls="logTable" data-dt-idx="0" tabindex="0">首页</a>
+          </li>
+          <li class="paginate_button previous disabled" id="logTable_previous">
+            <a href="http://10.43.139.201:57280/aie/index.html#" aria-controls="logTable" data-dt-idx="1" tabindex="0">上一页</a>
+          </li>
+          <li class="paginate_button next" id="logTable_next"><a href="http://10.43.139.201:57280/aie/index.html#" aria-controls="logTable" data-dt-idx="2" tabindex="0">下一页</a>
+          </li>
+          <li class="paginate_button last" id="logTable_last"><a href="http://10.43.139.201:57280/aie/index.html#" aria-controls="logTable" data-dt-idx="3" tabindex="0">末页</a>
+          </li>
+         </ul>
+      </div>
+      <div class="dataTables_length" id="logTable_length">
+       <label>每页显示  
+       <select name="logTable_length" aria-controls="logTable" class="form-control input-sm">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+       </select>
+       </label>
+      </div></div></div></div>
+     <div id="backup" class="wrapper" style="display: none;">
+      <button class="btn btn-primary btn-sm backup-btn" id_i18n="ict_oneminer_backup_btn">备份</button>
+      <div class="backup-detail"><p id_i18n="ict_oneminer_backup_title_auto">系统自动备份</p>
+         <p class="detail" id_i18n="ict_oneminer_backup_detail_auto">AI Explorer系统启动10分钟后进行第一次自动备份，以后每隔一天备份一次，只保留最近三天的备份文件，超期文件下次备份前自动删除。文件自动备份到系统安装路径backup/systemBackup/目录，文件格式示例backup-20180315152558.zip。</p>
+         <p class="title" id_i18n="ict_oneminer_backup_title_manual">手动备份</p>
+         <p class="detail" id_i18n="ict_oneminer_backup_detail_manual">用户在界面手动执行备份操作，文件自动备份到系统安装路径backup/manualBackup/目录，文件格式示例backup-20180315152558.zip，手动备份文件需要用户手动删除。界面的备份对应是手动备份。可以多次备份。</p><p class="title" id_i18n="ict_oneminer_backup_title_recovery">恢复步骤（只支持手动恢复）</p><p id_i18n="ict_oneminer_backup_detail_recovery_1">1.停止AI Explorer进程。</p><p id_i18n="ict_oneminer_backup_detail_recovery_2">2.解压备份文件backup-20180315152558.zip。</p><p id_i18n="ict_oneminer_backup_detail_recovery_3">3.进入解压后的备份文件目录。拷贝h2db目录下manager.mv.db覆盖到安装目录/AIExplorer/h2db/manager.mv.db，拷贝process目录下所有文件覆盖到安装目录/AIExplorer/process/。</p><p id_i18n="ict_oneminer_backup_detail_recovery_4">4.启动AI Explorer进程。</p></div></div></div><div id="visual" class="ui-layout-container" style="overflow: hidden; display: none; top: 45px;"><div id="left-item" class="ui-layout-pane ui-layout-pane-west" style="position: absolute; margin: 0px; left: 0px; right: auto; top: 0px; bottom: 0px; height: 632px; z-index: 0; width: 240px; display: block; visibility: visible;"><div id="visual-tabs" class="ui-tabs ui-corner-all ui-widget ui-widget-content"><ul role="tablist" class="ui-tabs-nav ui-corner-all ui-helper-reset ui-helper-clearfix ui-widget-header"><li role="tab" tabindex="0" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active" aria-controls="visual-op-tab" aria-labelledby="ui-id-6" aria-selected="true" aria-expanded="true"><a href="http://10.43.139.201:57280/aie/index.html#visual-op-tab" id_i18n="ict_oneminer_process_title_operator" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-6">算子</a></li><li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="visual-mod-tab" aria-labelledby="ui-id-7" aria-selected="false" aria-expanded="false"><a href="http://10.43.139.201:57280/aie/index.html#visual-mod-tab" id_i18n="ict_oneminer_process_title_model" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-7">模型</a></li></ul><div class="tab-content" style="height: calc(100% - 40px)"><div id="visual-op-tab" style="height:100%" aria-labelledby="ui-id-6" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="false"><div class="input-group col-md-12 tabSearchDiv"><input type="search" class="form-control" id="visual-opSearch" pl_i18n="ict_oneminer_search_operator" placeholder="搜索算子"></div><span id="visual-operator-tree-noMatches" id_i18n="ict_oneminer_no_operator_found" style="display:none;color:red">无匹配算子</span><div id="visual-op-tree-div" class="op-mod-tree-div"><ul id="visual-operator-tree" class="ztree pageLeft"></ul></div></div><div id="visual-mod-tab" style="height: 100%; display: none;" aria-labelledby="ui-id-7" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="true"><div class="input-group col-md-12 tabSearchDiv"><input type="search" class="form-control" id="modSearch" pl_i18n="ict_oneminer_search_model" placeholder="搜索模型"></div><span id="model-tree-noMatches" id_i18n="ict_oneminer_no_operator_found" style="display:none;color:red">无匹配算子</span><div id="visual-mod-tree-div" class="op-mod-tree-div"><ul id="visual-model-tree" class="ztree pageLeft"></ul></div></div></div></div></div><div id="center-item" class="ui-layout-pane ui-layout-pane-center ui-layout-container" style="position: absolute; margin: 0px; left: 246px; right: 266px; top: 0px; bottom: 0px; height: 632px; width: 692px; z-index: 0; display: block; visibility: visible; overflow: hidden;"><div id="visual-graph-panel" class="ui-layout-pane ui-layout-pane-center" style="position: absolute; margin: 0px; left: 0px; right: 0px; top: 0px; bottom: 6px; height: 625px; width: 690px; z-index: 0; display: block; visibility: visible;"><div class="title-bar" style="display:inline-block"><div style="display: inline" id_i18n="ict_zaip_title">深度学习可视化建模</div><div style="display: inline" id="zaip-mode"></div><div id="visual-toolbar" style="float: right"><span id="zaip-edit" class="fa fa-fw fa-pencil-square-o" aria-hidden="true" title="编辑" id_i18n="ict_oneminer_process_toolbar_tooltip_edit" style="display:none"></span> <span id="train-run" class="fa fa-fw fa-caret-square-o-right" aria-hidden="true" title="运行" id_i18n="ict_oneminer_process_toolbar_tooltip_run"></span> <span id="close-win" class="fa fa-fw fa-window-minimize" aria-hidden="true" title="关闭" id_i18n="ict_oneminer_process_toolbar_tooltip_close"></span></div></div><div id="visual-graph" oncontextmenu="return false;" style="position: relative; touch-action: none;"><svg style="width: 100%; height: 100%; display: block; min-width: 1px; min-height: 1px;"><g><g></g><g></g><g></g><g></g></g></svg></div></div><div id="visual-log" class="ui-layout-pane ui-layout-pane-south" style="position: absolute; margin: 0px; top: auto; bottom: 0px; left: 0px; right: 0px; width: auto; z-index: 0; height: 250px; display: none; visibility: visible;"><div class="title-bar clearfix"><div class="pull-left" id_i18n="ict_zaip_train">训练</div><div class="pull-right"><span id="pullmax" class="fa fa-expand"></span></div></div><div id="visual-log-content"></div></div><div title="Slide Open" id="visual-log-resizer" class="ui-layout-resizer ui-layout-resizer-south ui-draggable-handle ui-layout-resizer-closed ui-layout-resizer-south-closed ui-draggable-disabled" style="cursor: pointer; position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; bottom: 0px; width: 690px; height: 6px; left: 0px;"><div id="visual-log-toggler" class="ui-layout-toggler ui-layout-toggler-south ui-layout-toggler-closed ui-layout-toggler-south-closed" title="Open" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; width: 50px; height: 6px; left: 320px; top: 0px;"><span class="content content-open" style="display: none; margin-left: 1px;"><div class="ui-icon"></div></span><span class="content content-closed" style="display: block; margin-left: 1px;"><div class="ui-icon"></div></span></div></div></div><div id="right-item" class="ui-layout-pane ui-layout-pane-east" style="position: absolute; margin: 0px; left: auto; right: 0px; top: 0px; bottom: 0px; height: 632px; z-index: 0; width: 260px; display: block; visibility: visible;"><div id="visual-param-tabs" class="container-fluid"><ul><li><a href="http://10.43.139.201:57280/aie/index.html#visual-properties" id_i18n="ict_zaip_super_param">超参</a></li></ul><div class="tab-content" style="height: calc(100% - 40px)"><div id="visual-properties" style="height:100%"></div></div></div></div><div id="left-item-resizer" class="ui-layout-resizer ui-layout-resizer-west ui-draggable-handle ui-layout-resizer-open ui-layout-resizer-west-open" title="Resize" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; cursor: w-resize; left: 240px; height: 632px; width: 6px; top: 0px;"><div id="left-item-toggler" class="ui-layout-toggler ui-layout-toggler-west ui-layout-toggler-open ui-layout-toggler-west-open" title="Close" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; height: 50px; width: 6px; top: 291px; left: 0px;"><span class="content content-open" style="display: block; margin-top: 15px;"><div class="ui-icon"></div></span><span class="content content-closed" style="display: none; margin-top: 15px;"><div class="ui-icon"></div></span></div></div><div id="right-item-resizer" class="ui-layout-resizer ui-layout-resizer-east ui-layout-resizer-open ui-layout-resizer-east-open" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; right: 260px; cursor: default; height: 632px; width: 6px; top: 0px;"><div id="right-item-toggler" class="ui-layout-toggler ui-layout-toggler-east ui-layout-toggler-open ui-layout-toggler-east-open" title="Close" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; height: 50px; width: 6px; top: 291px; left: 0px;"><span class="content content-open" style="display: block; margin-top: 15px;"><div class="ui-icon"></div></span><span class="content content-closed" style="display: none; margin-top: 15px;"><div class="ui-icon"></div></span></div></div></div><script type="text/javascript" src="./AI Explorer_files/commons.b34fdd3c.js"></script><script type="text/javascript" src="./AI Explorer_files/create.b34fdd3c.js"></script><div id="ascrail2001" class="nicescroll-rails nicescroll-rails-vr" style="width: 6px; z-index: auto; background: rgb(66, 79, 99); cursor: default; position: absolute; top: 45px; left: 1187.31px; height: 637px; opacity: 0; display: none;"><div class="nicescroll-cursors" style="position: relative; top: 0px; float: right; width: 6px; height: 615px; background-color: rgba(255, 255, 255, 0.2); border: 0px; background-clip: padding-box; border-radius: 0px;"></div></div><div id="ascrail2001-hr" class="nicescroll-rails nicescroll-rails-hr" style="height: 6px; z-index: auto; background: rgb(66, 79, 99); top: 676px; left: 83.3125px; position: absolute; cursor: default; display: none; width: 1104px; opacity: 0;"><div class="nicescroll-cursors" style="position: absolute; top: 0px; height: 6px; width: 1110px; background-color: rgba(255, 255, 255, 0.2); border: 0px; background-clip: padding-box; border-radius: 0px; left: 0px;"></div></div><div id="ascrail2002" class="nicescroll-rails nicescroll-rails-vr" style="width: 6px; z-index: auto; background: rgb(66, 79, 99); cursor: default; position: absolute; top: 45px; left: 1187.31px; height: 637px; display: none; opacity: 0;"><div class="nicescroll-cursors" style="position: relative; top: 0px; float: right; width: 6px; height: 0px; background-color: rgba(255, 255, 255, 0.2); border: 0px; background-clip: padding-box; border-radius: 0px;"></div></div><div id="ascrail2002-hr" class="nicescroll-rails nicescroll-rails-hr" style="height: 6px; z-index: auto; background: rgb(66, 79, 99); top: 676px; left: 83.3125px; position: absolute; cursor: default; display: none; opacity: 0;"><div class="nicescroll-cursors" style="position: absolute; top: 0px; height: 6px; width: 0px; background-color: rgba(255, 255, 255, 0.2); border: 0px; background-clip: padding-box; border-radius: 0px; left: 0px;"></div></div><div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div><div id="ascrail2003" class="nicescroll-rails nicescroll-rails-vr" style="width: 6px; z-index: auto; background: rgb(66, 79, 99); cursor: default; position: absolute; top: 45px; left: 1187.31px; height: 637px; display: none; opacity: 0;"><div class="nicescroll-cursors" style="position: relative; top: 0px; float: right; width: 6px; height: 0px; background-color: rgba(255, 255, 255, 0.2); border: 0px; background-clip: padding-box; border-radius: 0px;"></div></div><div id="ascrail2003-hr" class="nicescroll-rails nicescroll-rails-hr" style="height: 6px; z-index: auto; background: rgb(66, 79, 99); top: 676px; left: 83.3125px; position: absolute; cursor: default; display: none; opacity: 0;"><div class="nicescroll-cursors" style="position: absolute; top: 0px; height: 6px; width: 0px; background-color: rgba(255, 255, 255, 0.2); border: 0px; background-clip: padding-box; border-radius: 0px; left: 0px;"></div></div></body></html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Bootstrap 4, from LayoutIt!</title>
+    <!-- Bootstrap 4, from LayoutIt! -->
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+
+  <div class="container-fluid">
+    <div id="header" class="row"> 
+      <div id="header-logo-col" class="header-logo-col" >		
+        <div class="col-md-12">
+            <a class="navbar-brand" href="#">Title</a>
+        </div>
+      </div>
+
+      <div id="header-nav-col"  class="header_nav_col">
+       <div id="header-nav-bar" class="col-md-12" >
+        <nav class="navbar navbar-default navbar-expand-lg navbar-light bg-light" role="navigation">
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="navbar-toggler-icon"></span>
+          </button> 
+          <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
+            <ul class="navbar-nav">
+              <li class="nav-item active"><a class="nav-link" href="#">首页 <span class="file:///home/wang/%E4%B8%8B%E8%BD%BD/aie/in/index.html#sr-only">(current)</span></a>						</li>
+                <li class="nav-item"><a class="nav-link" href="#">统计</a></li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown">Admin</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href="#">账户</a><a class="dropdown-item" href="#">关于</a> 
+                      <div class="dropdown-divider"></div><a class="dropdown-item" href="#">注销</a>
+                    </div>
+                </li>
+            </ul>
+          </div>
+        </nav>
+       </div>
+      </div>
+    </div><!-- end of head row-->
+
+    <div id="nav-left" class="row">
+      <div class="col-md-4">
+        <div class="list-group"> <a href="#" class="list-group-item list-group-item-action active" @click="change">Home</a> </div>
+        <div class="list-group-item">List header</div>
+        <div class="list-group-item"><h8 class="list-group-item-heading">List group item heading</h8></div>
+        <div class="list-group-item justify-content-between">Help <span class="badge badge-secondary badge-pill">14xxx</span></div> 
+      </div>
+  </div>
+
+  <div class="col-md-4">
+    <h2>Head1</h2>
+    <p>sed odio dui.</p>
+    <p><a class="btn" href="#"></a></p>
+  </div>
+  <div class="col-md-4">
+  <h2>Heading</h2><p>D</p>
+    <p><a class="btn" href="#">View details »</a></p>
+  </div>
+</div>
+
+</div>
+
+<script>
+var app = new Vue({
+    el:'#nav-left',
+    data:{
+      seen:true,
+      message:'隐藏'
+    },
+    methods:{
+      change:function(){
+         this.seen = !this.seen
+         if (this.seen) {
+            this.message = '隐藏'
+         }else{
+           this.message = '显示'
+         }
+      }
+    }
+  })
+</script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+  </body>
+</html>

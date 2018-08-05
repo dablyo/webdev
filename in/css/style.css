@@ -1,0 +1,42 @@
+/*# Empty CSS file for your own CSS*/
+
+.body{
+    background-color: #ccc;
+}
+#header {
+    /*border: 1px solid black;*/
+    height: 60px;
+
+}
+.header-logo-col{
+    /*background-color: yellow;*/
+    width:70%;
+    float:left;
+}
+.header_nav_col {
+    width:30%;
+    float: right;
+    -moz-opacity: 0.2;    
+}
+
+
+.left-side{
+    float: left;
+}
+.right-side{
+    float: right;
+}
+
+
+# .left-side{
+# width:70px;position:fixed;height:100%;overflow-y:auto;z-index:100;margin-top:44px;overflow-y:visible;border-right:1px solid #424f63}
+
+# .left-side .nav{
+# padding-top:20px}.left-side li{margin-top:2px}.left-side .nav a{text-align:center;color:#aaa;cursor:pointer}
+
+.left-side .active>a,
+.left-side .nav a:hover{
+background-color:rgba(250,251,252,.15);color:#fff}
+
+.left-side .block,
+.left-side .fa{display:block;padding-top:2px}.maint-menu{padding:0;list-style:none;float:right;display:none}
