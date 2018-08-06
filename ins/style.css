@@ -1,0 +1,18 @@
+#head-nav-btn{
+  /*padding:10px;*/
+}
+#main{
+  height:640px;
+}
+#left-res{
+  background:green;
+  height:100%
+}
+#mid-content{
+  background:yellow;
+  height:100%  
+}
+#right-pan{
+  background:blue;
+  height:100%  
+}
