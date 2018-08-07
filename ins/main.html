@@ -1,23 +1,27 @@
-<html><head>
-        <meta charset="utf-8">
-        <!--meta name="viewport" content="width=device-width, initial-scale=1"-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-        <!--script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css"-->
-        <script type="text/javascript" src="jquery/2.0.3/jquery.min.js"></script>
-        <script type="text/javascript" src="bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        <link href="font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="bootstrap/3.3.4/css/bootstrap.css" rel="stylesheet" type="text/css">
-		<link href="style.css" rel="stylesheet" type="text/css">
-		<!--script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp"></script-->
-		<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&key=MUNBZ-ZFER5-S6WIV-QGK6T-F4N5O-SJFYZ"></script>
-		<!--script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=MUNBZ-ZFER5-S6WIV-QGK6T-F4N5O-SJFYZ&libraries=drawing"></script--> <!--,geometry,autocomplete,convertor-->
-    </head><body>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!--meta name="viewport" content="width=device-width, initial-scale=1"-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <!--script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css"-->
 
-<div class="navbar navbar-default navbar-fixed-top section-info" id="header">
-  <div class="container">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <!--script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp"></script-->
+    <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&key=MUNBZ-ZFER5-S6WIV-QGK6T-F4N5O-SJFYZ"></script>
+    <!--script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=MUNBZ-ZFER5-S6WIV-QGK6T-F4N5O-SJFYZ&libraries=drawing"></script--> <!--,geometry,autocomplete,convertor-->
+  </head>
+  <body>
+
+<nav class="navbar navbar-default navbar-fixed-top  navbar-inverse" id="header">
+  <div class="container-fluid">
     <div class="navbar-header">
 	  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
 	    <span class="sr-only">Toggle navigation</span>
@@ -29,40 +33,48 @@
 	  <a class="navbar-brand">INS WAN</a>
     </div>
     <div class="collapse navbar-collapse" id="navbar-ex-collapse">
-      <ul class="nav navbar-nav navbar-right">
-	    <li><a href="#">首页</a></li>
-	    <li class="active"><a href="#">配置监控</a></li>
-		<li><a href="#">统计</a></li>
-		<li class="dropdown">
+      <ul class="nav navbar-nav navbar-right nav-tabs">
+        <li><a href="#">首页</a></li>
+        <li class="active"><a href="#">配置监控</a></li>
+        <li><a href="#">统计</a></li>
+        <li class="dropdown" role>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#">Profile</a></li>
-              <li><a href="#">Logout</a></li>
-			  <li class="divider"></li>
-              <li><a href="#">About</a></li>
-              </ul>
-		</li>
-	  </ul>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Logout</a></li>
+	    <li class="divider"></li>
+            <li><a href="#">About</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="section  text-justify" id="section1">
+  <div class="container-fluid">
+    <div class="row" id="main">
+	  <div style="margin-top:50px;">
+	    <div class="col-sm-2" id="left-res">
+              <!-- div style="margin-top:5px;height:80%;padding:10px;border:1px solid black" id="left-res-treeview"></div-->
+    	        <!--div class="col-sm-2">
+                  <input type="search" class="form-control" id="resSearch" pl_i18n="ict_oneminer_search_operator" placeholder="查找资源">
+                </div>
+    	        <div class="col-sm-2"-->
+
+                  <div id="treeview5" class=""></div>
+            </div> 
+  	    <div class="col-md-8" id="mid-content">
+	    </div>
+            <div class="col-md-2" id="right-pan">
+              <h3>仪表盘或者对象属性区域</h3>
+            </div>
+          </div>  
     </div>
   </div>
 </div>
 
-<div class="section  text-justify" id="section1">
-  <div class="container-fluid" id="main">
-    <div class="row">
-	  <div class="col-md-1" id="left-res">
-	    <h3>资源列表</h3>
-	  </div>
-	  <div style="margin-top:10px">
-	  <div class="col-md-8" id="mid-content">
-	    
-	  </div></div>
-	  <div class="col-md-3" id="right-pan">
-	    <h3>仪表盘或者对象属性区域</h3>
-	  </div>
-	</div>  
-  </div>
-</div>
 <div class="section section-info">
   <div class="container">
     <div class="row">
@@ -86,14 +98,89 @@
 			  </div></div></div></div></div>
 		</div></div></div>
 </div>
-
-<script>
+    <script src="https://cdn.staticfile.org/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+<script type="text/javascript">
+//-----------------------------------resource----treeview---------------------------------------------
+  $(function() {
+        var defaultData = [
+          {
+            text: '永辉',
+            href: '#parent1',
+            tags: ['4'],
+            nodes: [
+              {
+                text: '南京区域',
+                href: '#child1',
+                tags: ['2'],
+                nodes: [
+                  {
+                    text: '浦珠路店',
+                    href: '#grandchild1',
+                    tags: ['0']
+                  },
+                  {
+                    text: '明发广场店',
+                    href: '#grandchild2',
+                    tags: ['0']
+                  }
+                ]
+              },
+              {
+                text: '镇江区域',
+                href: '#child2',
+                tags: ['0'],
+                nodes: [
+                  {
+                    text: '滨江路店',
+                    href: '#grandchild1',
+                    tags: ['0']
+                  },
+                  {
+                    text: '南徐大道店',
+                    href: '#grandchild2',
+                    tags: ['0']
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            text: '栖霞建设',
+            href: '#parent2',
+            tags: ['0']
+          },
+          {
+            text: '服务节点',
+            href: '#parent5'  ,
+            tags: ['0']
+          }
+        ];
+       $('#treeview5').treeview({
+          expandIcon: "glyphicon glyphicon-triangle-right",
+          collapseIcon: "glyphicon glyphicon-triangle-bottom",
+          nodeIcon: "glyphicon glyphicon-object-align-left",
+          color: "black",
+          onhoverColor: "#3a5fcd",
+          borderColor: "black",
+          showBorder: false,
+          showTags: false,
+          highlightSelected: true,
+          selectedColor: "white",
+          selectedBackColor: "#3a5fcd",
+          data: defaultData
+        });
+  });
+//-----------------------------------map--------------------------------------------------------------
+/*
+var map;
 window.onload = function(){
 //直接加载地图
     //初始化地图函数  自定义函数名init
     function init() {
         //定义map变量 调用 qq.maps.Map() 构造函数   获取地图显示容器
-         var map = new qq.maps.Map(document.getElementById("mid-content"), {
+         map = new qq.maps.Map(document.getElementById("mid-content"), {
             center: new qq.maps.LatLng(39.916527,116.397128),      // 地图的中心地理坐标。
             zoom:8                                                 // 地图的中心地理坐标。
         });
@@ -101,32 +188,8 @@ window.onload = function(){
     //调用初始化函数地图
     //init();
 }
+*/
 
-function init() {
-  //设置地图中心点
-  var myLatlng = new qq.maps.LatLng(39.916527,116.397128);
-  //定义工厂模式函数
-  var myOptions = {
-    zoom: 8,               //设置地图缩放级别
-    center: myLatlng,      //设置中心点样式
-    mapTypeId: qq.maps.MapTypeId.ROADMAP  //设置地图样式详情参见MapType
-  }
-  //获取dom元素添加地图信息
-  var map = new qq.maps.Map(document.getElementById("mid-content"), myOptions);
-}
-  //异步加载地图库函数文件
-function loadScript() {
-  //创建script标签
-  var script = document.createElement("script");
-  //设置标签的type属性
-  script.type = "text/javascript";
-  //设置标签的链接地址
-  script.src = "http://map.qq.com/api/js?v=2.exp&callback=init";
-  //添加标签到dom
-  document.body.appendChild(script);
-}
-window.onload = loadScript;    // dom文档加载结束开始加载 此段代码
 </script>
-
 </body>
 </html>

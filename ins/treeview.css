@@ -1,0 +1,12 @@
+#main{
+  background:#ccc;
+  width:80%;
+  height:600px;1
+  margin:50px;
+}
+#treeview{
+  border:5px solid black;
+  width:80%;
+  margin:10px;
+  text-align:center;
+}
